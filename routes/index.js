@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const libKakaoWork = require('../libs/kakaoWork');
+const libKakaoWork =require('../libs/kakaoWork');
+const userService = require("../services/userService");
+const customModals = require("../modal")
+
+// console.log(customModals.serviceRegisterModal.blocks)
 
 router.get('/', async (req, res, next) => {
   // 유저 목록 검색 (1)
 	
   const users = await libKakaoWork.getUserList();
-	
   // 검색된 모든 유저에게 각각 채팅방 생성 (2)
   const conversations = await Promise.all(
     users.map((user) => libKakaoWork.openConversations({ userId: user.id }))
@@ -17,27 +20,8 @@ router.get('/', async (req, res, next) => {
     conversations.map((conversation) =>
       libKakaoWork.sendMessage({
         conversationId: conversation.id,
-        text: '설문조사 이벤트',
-        blocks: [
-          {
-            type: 'header',
-            text: '☕ 사내 카페 만족도 조사 🥤',
-            style: 'blue',
-          },
-          {
-            type: 'text',
-            text:
-              '어느덧 사내카페가 바뀐지 한달이 되었습니다.\n구르미들이 카페를 이용하고 계신지 의견을 들어보고자 설문 조사를 진행해봅니다!!\n설문에 참여하면 푸짐한 경품 찬스가있으니 상품 꼭 받아가세요! 🎁',
-            markdown: true,
-          },
-          {
-            type: 'button',
-            action_type: 'call_modal',
-            value: 'cafe_survey',
-            text: '설문 참여하기',
-            style: 'default',
-          },
-        ],
+        text: '거북이 도착',
+        blocks: customModals.serviceRegisterModal.blocks,
       })
     ),
   ]);
@@ -48,132 +32,61 @@ router.get('/', async (req, res, next) => {
     messages,
   });
 });
-
 //push test
-
-
 
 // routes/index.js
 router.post('/request', async (req, res, next) => {
   const { message, value } = req.body;
 
+console.log(req.body)
   switch (value) {
-    case 'cafe_survey':
-      // 설문조사용 모달 전송
-      return res.json({
-        view: {
-          title: '설문조사',
-          accept: '설문조사 전송하기',
-          decline: '취소',
-          value: 'cafe_survey_results',
-          blocks: [
-            {
-              type: 'label',
-              text: '카페 평점을 알려주세요',
-              markdown: false,
-            },
-            {
-              type: 'select',
-              name: 'rating',
-              required: true,
-              options: [
-                {
-                  text: '1점',
-                  value: '1',
-                },
-                {
-                  text: '2점',
-                  value: '2',
-                },
-                {
-                  text: '3점',
-                  value: '3',
-                },
-                {
-                  text: '4점',
-                  value: '4',
-                },
-                {
-                  text: '5점',
-                  value: '5',
-                },
-              ],
-              placeholder: '평점',
-            },
-            {
-              type: 'label',
-              text: '바라는 점이 있다면 알려주세요!',
-              markdown: false,
-            },
-            {
-              type: 'input',
-              name: 'wanted',
-              required: false,
-              placeholder: 'ex) 와플을 팔면 좋겠습니다',
-            },
-          ],
-        },
-      });
-      break;
-    default:
+    case 'turtle_active':
+		  console.log("yeah active");
+		  
+		  break;
+	case 'turtle_inactive':
+		  console.log("yeah deactive");
+		  
+		  break;
+	  default:
+		  
   }
   res.json({});
 });
 
 // routes/index.js
 router.post('/callback', async (req, res, next) => {
-  const { message, actions, action_time, value } = req.body; // 설문조사 결과 확인 (2)
-
-  switch (value) {
-    case 'cafe_survey_results':
-      // 설문조사 응답 결과 메세지 전송 (3)
-      await libKakaoWork.sendMessage({
-        conversationId: message.conversation_id,
-        text: '설문조사에 응해주셔서 감사합니다!',
-        blocks: [
-          {
-            type: 'text',
-            text: '설문조사에 응해주셔서 감사합니다! 🎁',
-            markdown: true,
-          },
-          {
-            type: 'text',
-            text: '*답변 내용*',
-            markdown: true,
-          },
-          {
-            type: 'description',
-            term: '평점',
-            content: {
-              type: 'text',
-              text: actions.rating,
-              markdown: false,
-            },
-            accent: true,
-          },
-          {
-            type: 'description',
-            term: '바라는 점',
-            content: {
-              type: 'text',
-              text: actions.wanted,
-              markdown: false,
-            },
-            accent: true,
-          },
-          {
-            type: 'description',
-            term: '시간',
-            content: {
-              type: 'text',
-              text: action_time,
-              markdown: false,
-            },
-            accent: true,
-          },
-        ],
-      });
-      break;
+  const { message, action_name, actions, action_time, value, react_user_id } = req.body; // 설문조사 결과 확인 (2)
+	// console.log(req.body);
+	const newuser = await libKakaoWork.getUserInfo(react_user_id);
+	
+  switch (action_name) {
+    case "active":	  
+	  newuser.level = value;
+	  switch (value){
+		  case '1' : newuser.NextUpdateTime = Math.round(Math.random() * (60) + 150); break; // 2시간 반 ~ 3시간 반
+		  case '2' : newuser.NextUpdateTime = Math.round(Math.random() * (60) + 90); break; // 1시간 반 ~ 2시간 반
+		  case '3' : newuser.NextUpdateTime = Math.round(Math.random() * (60) + 30); break; // 30분 ~ 1시간 반
+	  }
+	  userService.appendUser(newuser);	
+	
+	  await libKakaoWork.sendMessage({
+	  conversationId: message.conversation_id,
+	  text: '안녕하세요, 친절한 거북씨에요',
+	  blocks: customModals.registerCompleteModal.blocks
+	  });
+	  break;	
+		  
+  	case "reject":	  
+	  userService.deleteUser(newuser);	  
+		  
+	  await libKakaoWork.sendMessage({
+	  conversationId: message.conversation_id,
+	  text: '안녕하세요, 친절한 거북씨에요',
+	  blocks: customModals.registerRejectModal.blocks
+	  });
+		  
+	  break;
     default:
   }
 
