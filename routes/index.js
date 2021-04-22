@@ -51,6 +51,8 @@ router.get('/', async (req, res, next) => {
 
 //push test
 
+
+
 // routes/index.js
 router.post('/request', async (req, res, next) => {
   const { message, value } = req.body;
@@ -115,7 +117,6 @@ router.post('/request', async (req, res, next) => {
       break;
     default:
   }
-
   res.json({});
 });
 
@@ -178,7 +179,6 @@ router.post('/callback', async (req, res, next) => {
 
   res.json({ result: true });
 });
-
 
 
 module.exports = router;
