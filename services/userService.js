@@ -43,7 +43,6 @@ function deleteUser(user){
 	console.log(serviceRegisteredUser);
 }
 
-
 //거북이 등장하고 난 뒤 NextUpdateTime 초기화
 function initUpdateNextTime(user){
 	switch (user.level){

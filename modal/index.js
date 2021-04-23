@@ -94,3 +94,4 @@ registerRejectModal = {
 module.exports.registerCompleteModal = registerCompleteModal;
 module.exports.registerRejectModal = registerRejectModal;
 module.exports.serviceRegisterModal = serviceRegisterModal;
+
