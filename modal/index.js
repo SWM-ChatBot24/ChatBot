@@ -118,8 +118,21 @@ pairingServiceModal = {
 }
 
 
+messageServiceModal = {
+  "text": "목펴랏!!",
+  "blocks": [
+    {
+      "type": "text",
+      "text": "목펴랏!",
+      "markdown": true
+    }
+  ]
+}
+
+
 module.exports.registerCompleteModal = registerCompleteModal;
 module.exports.registerRejectModal = registerRejectModal;
 module.exports.levelChangeModal = levelChangeModal;
 module.exports.serviceRegisterModal = serviceRegisterModal;
 module.exports.pairingServiceModal = pairingServiceModal;
+module.exports.messageServiceModal = messageServiceModal;

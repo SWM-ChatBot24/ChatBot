@@ -58,9 +58,9 @@ function deleteUser(user){
 //거북이 등장하고 난 뒤 NextUpdateTime 초기화
 function updateNextTime(user){
 	switch (user.level){
-		 case '1' : user.NextUpdateTime = Math.round(Math.random() * (60) + 150) * 60000; break; // 2시간 반 ~ 3시간 반
-		 case '2' : user.NextUpdateTime = Math.round(Math.random() * (60) + 90) * 60000; break; // 1시간 반 ~ 2시간 반
-		 case '3' : user.NextUpdateTime = Math.round(Math.random() * (60) + 30) * 60000; break; // 30분 ~ 1시간 반
+		 case '1' : user.NextUpdateTime += Math.round(Math.random() * (60) + 150) * 60000; break; // 2시간 반 ~ 3시간 반
+		 case '2' : user.NextUpdateTime += Math.round(Math.random() * (60) + 90) * 60000; break; // 1시간 반 ~ 2시간 반
+		 case '3' : user.NextUpdateTime += Math.round(Math.random() * (60) + 30) * 60000; break; // 30분 ~ 1시간 반
 	}
 }
 
@@ -78,22 +78,17 @@ function updateNextTime(user){
 
         if(nowTime >= nextUpdateTime){
             //update next time
-            updateNextTime(user);
-
-            //send message
-            const conversations = await Promise.all(
-                selectedPair.map((user) => libKakaoWork.openConversations({ userId: user }))
-            );
-
-            const messages = await Promise.all(
-                conversations.map((conversation) => 
-                    libKakaoWork.sendMessage({
-                        conversationId: conversation.id,
-                        text: '목펴랏!',
-                        blocks: customModals.pairingServiceModal.blocks,
-                    })
-                )
-            );
+            await updateNextTime(user);
+			
+			//open conversation
+			const conversation = await libKakaoWork.openConversations({ userId: id });
+			
+			//send message
+			await libKakaoWork.sendMessage({
+				conversationId: conversation.id,
+				text: '목펴랏!',
+				blocks: customModals.messageServiceModal.blocks,
+			});
         }
     }
 }
