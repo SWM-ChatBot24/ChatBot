@@ -90,7 +90,19 @@ registerRejectModal = {
 }
 
 
+pairingServiceModal = {
+  "text": "가랏!",
+  "blocks": [
+    {
+      "type": "text",
+      "text": "가랏!",
+      "markdown": true
+    }
+  ]
+}
+
 
 module.exports.registerCompleteModal = registerCompleteModal;
 module.exports.registerRejectModal = registerRejectModal;
 module.exports.serviceRegisterModal = serviceRegisterModal;
+module.exports.pairingServiceModal = pairingServiceModal;
