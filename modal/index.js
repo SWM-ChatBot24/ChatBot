@@ -73,6 +73,22 @@ registerCompleteModal = {
 }
 
 
+levelChangeModal = {
+  "text": "Push alarm message",
+  "blocks": [
+    {
+      "type": "header",
+      "text": "난이도 변경!",
+      "style": "blue"
+    },
+    {
+      "type": "text",
+      "text": "현재 난이도: 매운맛",
+      "markdown": true
+    }
+  ]
+}
+
 registerRejectModal = {
   "text": "친절한 거북씨",
   "blocks": [
@@ -90,8 +106,20 @@ registerRejectModal = {
 }
 
 
+pairingServiceModal = {
+  "text": "가랏!",
+  "blocks": [
+    {
+      "type": "text",
+      "text": "가랏!",
+      "markdown": true
+    }
+  ]
+}
+
 
 module.exports.registerCompleteModal = registerCompleteModal;
 module.exports.registerRejectModal = registerRejectModal;
+module.exports.levelChangeModal = levelChangeModal;
 module.exports.serviceRegisterModal = serviceRegisterModal;
-
+module.exports.pairingServiceModal = pairingServiceModal;

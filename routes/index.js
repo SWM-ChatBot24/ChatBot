@@ -68,13 +68,9 @@ router.post('/callback', async (req, res, next) => {
 		  case '2' : newuser.NextUpdateTime = Math.round(Math.random() * (60) + 90); break; // 1시간 반 ~ 2시간 반
 		  case '3' : newuser.NextUpdateTime = Math.round(Math.random() * (60) + 30); break; // 30분 ~ 1시간 반
 	  }
-	  userService.appendUser(newuser);	
-	
-	  await libKakaoWork.sendMessage({
-	  conversationId: message.conversation_id,
-	  text: '안녕하세요, 친절한 거북씨에요',
-	  blocks: customModals.registerCompleteModal.blocks
-	  });
+	  userService.checkAndAppendUser(newuser, message);	
+	  
+	  
 	  break;	
 		  
   	case "reject":	  
