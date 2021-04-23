@@ -63,13 +63,10 @@ router.post('/callback', async (req, res, next) => {
   switch (action_name) {
     case "active":	  
 	  newuser.level = value;
-	  switch (value){
-		  case '1' : newuser.NextUpdateTime = Math.round(Math.random() * (60) + 150); break; // 2시간 반 ~ 3시간 반
-		  case '2' : newuser.NextUpdateTime = Math.round(Math.random() * (60) + 90); break; // 1시간 반 ~ 2시간 반
-		  case '3' : newuser.NextUpdateTime = Math.round(Math.random() * (60) + 30); break; // 30분 ~ 1시간 반
-	  }
+	  newuser.NextUpdateTime = Date.now();
+
+	  userService.updateNextTime(newuser);
 	  userService.checkAndAppendUser(newuser, message);	
-	  
 	  
 	  break;	
 		  

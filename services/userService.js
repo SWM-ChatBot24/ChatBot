@@ -6,7 +6,7 @@ value : this
 this.id = 고유번호
 this.name = 이름
 this.level = 거북봇 등장 속도 (1 : 낮음, 3 : 높음)
-this.NextUpdateTime = 다음 거북봇 등장까지 남은 시간(분)
+this.NextUpdateTime = 다음 거북봇 등장 시간(Date.now() 기준, ms)
 */
 const libKakaoWork =require('../libs/kakaoWork');
 const customModals = require("../modal")
@@ -56,20 +56,46 @@ function deleteUser(user){
 }
 
 //거북이 등장하고 난 뒤 NextUpdateTime 초기화
-function initUpdateNextTime(user){
+function updateNextTime(user){
 	switch (user.level){
-		 case '1' : newuser.NextUpdateTime = Math.round(Math.random() * (60) + 150); break; // 2시간 반 ~ 3시간 반
-		 case '2' : newuser.NextUpdateTime = Math.round(Math.random() * (60) + 90); break; // 1시간 반 ~ 2시간 반
-		 case '3' : newuser.NextUpdateTime = Math.round(Math.random() * (60) + 30); break; // 30분 ~ 1시간 반
+		 case '1' : user.NextUpdateTime = Math.round(Math.random() * (60) + 150) * 60000; break; // 2시간 반 ~ 3시간 반
+		 case '2' : user.NextUpdateTime = Math.round(Math.random() * (60) + 90) * 60000; break; // 1시간 반 ~ 2시간 반
+		 case '3' : user.NextUpdateTime = Math.round(Math.random() * (60) + 30) * 60000; break; // 30분 ~ 1시간 반
 	}
 }
 
-function getActiveUserIDList(){
-	return serviceRegisteredUser;
-}
+/**
+ * Compare NowTime with Next Update Time
+ * Send message to target
+ * Update Next Update Time of target
+ */
+ async function processUpdateTime(){
+    const nowTime = Date.now();
 
-function getLevelOfUser(user){
-	return user.level;
+    for(var id in serviceRegisteredUser){
+        var user = serviceRegisteredUser[id];
+        var nextUpdateTime = user.NextUpdateTime;
+
+        if(nowTime >= nextUpdateTime){
+            //update next time
+            updateNextTime(user);
+
+            //send message
+            const conversations = await Promise.all(
+                selectedPair.map((user) => libKakaoWork.openConversations({ userId: user }))
+            );
+
+            const messages = await Promise.all(
+                conversations.map((conversation) => 
+                    libKakaoWork.sendMessage({
+                        conversationId: conversation.id,
+                        text: '목펴랏!',
+                        blocks: customModals.pairingServiceModal.blocks,
+                    })
+                )
+            );
+        }
+    }
 }
 
 function getUnpairedUserIDList(){
@@ -128,14 +154,10 @@ async function pairingUser(){
 	}
 }
 
-//Run pairingUser function every interval
+//Run functions every interval
 setInterval(pairingUser, 10000);
+setInterval(processUpdateTime, 10000);
 
-// module.exports.appendUser = appendUser; // does not use outside
 module.exports.checkAndAppendUser = checkAndAppendUser;
 module.exports.deleteUser = deleteUser;
-
-module.exports.initUpdateNextTime = initUpdateNextTime;
-module.exports.getActiveUserIDList = getActiveUserIDList;
-module.exports.getLevelOfUser = getLevelOfUser;
-
+module.exports.updateNextTime = updateNextTime;
