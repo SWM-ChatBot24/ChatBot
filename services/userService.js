@@ -12,7 +12,6 @@ const libKakaoWork =require('../libs/kakaoWork');
 const customModals = require("../modal")
 
 let serviceRegisteredUser = {} 
-
 let unpairedUser = {}
 
 //push user to serviceRegisteredUser
@@ -144,7 +143,8 @@ async function pairingUser(){
 					text: '가랏!',
 					blocks: customModals.pairingServiceModal.blocks,
 				}
-				message.blocks[0].text = serviceRegisteredUser[selectedPair[(index+1)%2]].name+"님에게 일일 거북씨가 되어보세요!"
+				console.log(conversation,index);
+				message.blocks[0].text = serviceRegisteredUser[selectedPair[(index+1)%2]].name+"님에게 일일 거북씨가 되어보세요!";
 				libKakaoWork.sendMessage(message);
 			})
 		);

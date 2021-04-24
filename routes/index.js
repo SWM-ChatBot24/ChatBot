@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
       libKakaoWork.sendMessage({
         conversationId: conversation.id,
         text: '거북이 도착',
-        blocks: customModals.serviceRegisterModal.blocks,
+        blocks: customModals.serviceRegisterModal.blocks, // 간단한 시작하기 모달
       })
     ),
   ]);
@@ -37,53 +37,73 @@ router.get('/', async (req, res, next) => {
 // routes/index.js
 router.post('/request', async (req, res, next) => {
   const { message, value } = req.body;
-
-console.log(req.body)
+	
   switch (value) {
-    case 'turtle_active':
-		  console.log("yeah active");
+    case '1': // register service
+		res.json({
+			view: customModals.dynamicServiceRegisterModal // 반응형 모달 추가
+		});
 		  
-		  break;
-	case 'turtle_inactive':
-		  console.log("yeah deactive");
+		break;
 		  
-		  break;
-	  default:
+	case '0':
+		console.log("yeah deactive");
+		break;
+	default:
 		  
   }
-  res.json({});
 });
 
 // routes/index.js
 router.post('/callback', async (req, res, next) => {
-  const { message, action_name, actions, action_time, value, react_user_id } = req.body; // 설문조사 결과 확인 (2)
-	// console.log(req.body);
+	const { message, action_name, actions, action_time, value, react_user_id } = req.body; // 설문조사 결과 확인 (2)
 	const newuser = await libKakaoWork.getUserInfo(react_user_id);
+  
+    // before dynamic blocks used
+	// ** deprecated **
+	switch (action_name) {
+		case "active":	  
+			newuser.level = value;
+			newuser.NextUpdateTime = Date.now();
+			userService.updateNextTime(newuser);
+			userService.checkAndAppendUser(newuser, message);	
+			break;	
+
+		case "reject":	  
+			userService.deleteUser(newuser);	  
+	  		await libKakaoWork.sendMessage({
+				conversationId: message.conversation_id,
+				text: '안녕하세요, 친절한 거북씨에요',
+				blocks: customModals.registerRejectModal.blocks
+			});
+
+		  	break;
+		default:
+	}
+  
+	// after dynamic block implementation
+	// 1, 2, 3 : levels | 0: service disable
+	switch(actions.select_turtle){
+		case '1':
+		case '2':
+		case '3':
+			newuser.level = actions.select_turtle;
+			newuser.NextUpdateTime = Date.now();
+			userService.updateNextTime(newuser);
+			userService.checkAndAppendUser(newuser, message);	
+			break;
+		case '0':
+			userService.deleteUser(newuser);	  
+			await libKakaoWork.sendMessage({
+				conversationId: message.conversation_id,
+				text: '안녕하세요, 친절한 거북씨에요',
+				blocks: customModals.registerRejectModal.blocks
+			});  
+			break;
+		default:
+	}
 	
-  switch (action_name) {
-    case "active":	  
-	  newuser.level = value;
-	  newuser.NextUpdateTime = Date.now();
-
-	  userService.updateNextTime(newuser);
-	  userService.checkAndAppendUser(newuser, message);	
-	  
-	  break;	
-		  
-  	case "reject":	  
-	  userService.deleteUser(newuser);	  
-		  
-	  await libKakaoWork.sendMessage({
-	  conversationId: message.conversation_id,
-	  text: '안녕하세요, 친절한 거북씨에요',
-	  blocks: customModals.registerRejectModal.blocks
-	  });
-		  
-	  break;
-    default:
-  }
-
-  res.json({ result: true });
+  	res.json({ result: true });
 });
 
 

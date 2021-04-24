@@ -1,4 +1,4 @@
-
+/*
 serviceRegisterModal = {
 	"text": "친절한 거북씨",
 	"blocks": [
@@ -41,7 +41,21 @@ serviceRegisterModal = {
 		  },
         ]
 }
+*/
 
+serviceRegisterModal = {
+	"text": "친절한 거북씨",
+	"blocks": [
+          {
+			  type: "button",
+			  text: "거북씨 시작하기 🐢",
+			  style : "default",
+			  action_type : "call_modal",
+			  value: "1",
+			  action_name: 'start'
+		  },
+        ]
+}
 
 
 registerCompleteModal = {
@@ -66,7 +80,7 @@ registerCompleteModal = {
       },
       "accessory": {
         "type": "image_link",
-        "url": "https://t1.kakaocdn.net/kakaowork/resources/block-kit/section/8twinkle@3x.jpg"
+        "url": "https://chatbot-fsmrz.run.goorm.io/static/turtletest.jpg"
       }
     }
   ]
@@ -130,9 +144,65 @@ messageServiceModal = {
 }
 
 
+dynamicServiceRegisterModal = {
+    "title": "나의 거북씨🐢",
+    "accept": "입니다.",
+    "decline": "아닙니다.",
+    "value": "my_turtle_is",
+    "blocks": [
+        {
+            "type": "label",
+            "text": " ",
+            "markdown": true
+        },
+        {
+            "type": "label",
+            "text": " ",
+            "markdown": true
+        },
+        {
+            "type": "label",
+            "text": " ",
+            "markdown": true
+        },
+        {
+            "type": "label",
+            "text": "나의 거북씨는요,",
+            "markdown": true
+        },
+        {
+            "type": "select",
+            "name": "select_turtle",
+            "options": [
+                {
+                    "text": "빡센 거북씨 😎",
+                    "value": "3"
+                },
+                {
+                    "text": "평범한 거북씨 😊",
+                    "value": "2"
+                },
+                {
+                    "text": "느긋한 거북씨 🙂",
+                    "value": "1"
+                },
+                {
+                    "text": "휴식하는 거북씨 😴",
+                    "value": "0"
+                }
+            ],
+            "required": true,
+            "placeholder": "어떤 거북씨일까요?"
+        }
+    ]
+}
+
+
+
 module.exports.registerCompleteModal = registerCompleteModal;
 module.exports.registerRejectModal = registerRejectModal;
 module.exports.levelChangeModal = levelChangeModal;
 module.exports.serviceRegisterModal = serviceRegisterModal;
 module.exports.pairingServiceModal = pairingServiceModal;
 module.exports.messageServiceModal = messageServiceModal;
+module.exports.dynamicServiceRegisterModal = dynamicServiceRegisterModal;
