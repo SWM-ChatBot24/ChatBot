@@ -21,9 +21,9 @@ function checkAndAppendUser(user, message){
 		appendUser(user);
 		// send message to user
 		libKakaoWork.sendMessage({
-		  conversationId: message.conversation_id,
-		  text: '안녕하세요, 친절한 거북씨에요',
-		  blocks: customModals.registerCompleteModal.blocks
+			conversationId: message.conversation_id,
+			text: '안녕하세요, 친절한 거북씨에요',
+			blocks: customModals.registerCompleteModal.blocks
 		});
 		
 	}else{
@@ -32,9 +32,9 @@ function checkAndAppendUser(user, message){
 		
 		customModals.levelChangeModal.blocks[1].text = "현재 난이도: " + user.level;
 		libKakaoWork.sendMessage({
-		  conversationId: message.conversation_id,
-		  text: '안녕하세요, 친절한 거북씨에요',
-		  blocks: customModals.levelChangeModal.blocks
+			conversationId: message.conversation_id,
+			text: '안녕하세요, 친절한 거북씨에요',
+			blocks: customModals.levelChangeModal.blocks
 		});
 	}
 }
@@ -68,7 +68,7 @@ function updateNextTime(user){
  * Send message to target
  * Update Next Update Time of target
  */
- async function processUpdateTime(){
+async function processUpdateTime(){
     const nowTime = Date.now();
 
     for(var id in serviceRegisteredUser){
@@ -129,25 +129,18 @@ async function pairingUser(){
 		selectedPair = await getRandomUserIDList(unpairedUserIDList);
 	}
 	if(selectedPair.length){
-		console.log(selectedPair);
 		delete unpairedUser[selectedPair[0]];
 		delete unpairedUser[selectedPair[1]];
 		
-		const conversations = await Promise.all(
-			selectedPair.map((user) => libKakaoWork.openConversations({ userId: user }))
-		);
-		const messages = await Promise.all(
-			conversations.map((conversation,index) => {
-				let message = {
-					conversationId: conversation.id,
-					text: '가랏!',
-					blocks: customModals.pairingServiceModal.blocks,
-				}
-				console.log(conversation,index);
-				message.blocks[0].text = serviceRegisteredUser[selectedPair[(index+1)%2]].name+"님에게 일일 거북씨가 되어보세요!";
-				libKakaoWork.sendMessage(message);
-			})
-		);
+		const conversation = await libKakaoWork.openConversations({ userId: selectedPair[0] });
+		let message = {
+			conversationId: conversation.id,
+			text: '가랏!',
+			blocks: customModals.pairingServiceModal.blocks,
+		};
+		message.blocks[0].text = serviceRegisteredUser[selectedPair[1]].name+"님에게 일일 거북씨가 되어보세요!";
+		libKakaoWork.sendMessage(message);
+		console.log(unpairedUser);
 	}
 }
 
