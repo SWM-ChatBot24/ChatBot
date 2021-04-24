@@ -138,13 +138,15 @@ async function pairingUser(){
 			selectedPair.map((user) => libKakaoWork.openConversations({ userId: user }))
 		);
 		const messages = await Promise.all(
-			conversations.map((conversation) => 
-				libKakaoWork.sendMessage({
+			conversations.map((conversation,index) => {
+				let message = {
 					conversationId: conversation.id,
 					text: '가랏!',
 					blocks: customModals.pairingServiceModal.blocks,
-				})
-			)
+				}
+				message.blocks[0].text = serviceRegisteredUser[selectedPair[(index+1)%2]].name+"님에게 일일 거북씨가 되어보세요!"
+				libKakaoWork.sendMessage(message);
+			})
 		);
 	}
 }
