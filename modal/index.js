@@ -340,3 +340,4 @@ module.exports.messageServiceModal_1 = messageServiceModal_1;
 module.exports.messageServiceModal_2 = messageServiceModal_2;
 module.exports.messageServiceModal_3 = messageServiceModal_3;
 module.exports.dynamicServiceRegisterModal = dynamicServiceRegisterModal;
+module.exports.messageURLServiceModal = messageURLServiceModal;
