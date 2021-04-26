@@ -176,14 +176,14 @@ async function pairingUser(){
 		delete unpairedUser[selectedPair[1]];
 		
 		const conversation = await libKakaoWork.openConversations({ userId: selectedPair[0] });
+		console.log(conversation);
 		let message = {
 			conversationId: conversation.id,
 			text: '가랏!',
 			blocks: customModals.pairingServiceModal.blocks,
 		};
-		message.blocks[0].text = serviceRegisteredUser[selectedPair[1]].name+"님에게 일일 거북씨가 되어보세요!";
+		message.blocks[2].text = serviceRegisteredUser[selectedPair[1]].name+" 님의 일일 거북씨 입니다.";
 		libKakaoWork.sendMessage(message);
-		console.log(unpairedUser);
 	}
 }
 
