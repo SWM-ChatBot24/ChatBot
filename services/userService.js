@@ -74,21 +74,32 @@ function deleteUser(user){
 	// console.log(unpairedUser);
 }
 
+//get random int between min & max
+function randomInt(min, max){
+	return Math.round(Math.random() * (max - min)) + min;
+}
+
 //거북이 등장하고 난 뒤 NextUpdateTime 초기화
 function updateNextTime(user){
 	switch (user.level){
-		 case '1' : user.NextUpdateTime += Math.round(Math.random() * (60) + 150) * 60000; break; // 2시간 반 ~ 3시간 반
-		 case '2' : user.NextUpdateTime += Math.round(Math.random() * (60) + 90) * 60000; break; // 1시간 반 ~ 2시간 반
-		 case '3' : user.NextUpdateTime += Math.round(Math.random() * (60) + 30) * 60000; break; // 30분 ~ 1시간 반
+		case '1' : user.NextUpdateTime += randomInt(150, 210) * 60000; break; // 2시간 반 ~ 3시간 반
+		case '2' : user.NextUpdateTime += randomInt(90, 150)  * 60000; break; // 1시간 반 ~ 2시간 반
+		case '3' : user.NextUpdateTime += randomInt(30, 90)  * 60000; break; // 30분 ~ 1시간 반
 	}
 }
+
+let stretchingURLList = [
+	'https://youtu.be/XT1dHyI86eQ',
+	'https://youtu.be/YFWxji9yGss',
+	'https://youtu.be/TiMJOt6stPE',
+]
 
 /**
  * Compare NowTime with Next Update Time
  * Send message to target
  * Update Next Update Time of target
  */
- async function processUpdateTime(){
+async function processUpdateTime(){
     const nowTime = Date.now();
 
     for(var id in serviceRegisteredUser){
@@ -102,12 +113,24 @@ function updateNextTime(user){
 			//open conversation
 			const conversation = await libKakaoWork.openConversations({ userId: id });
 			
-			//send message
-			await libKakaoWork.sendMessage({
-				conversationId: conversation.id,
-				text: '목펴랏!',
-				blocks: messageServeiceModalMap[Number(user.level)].blocks,
-			});
+			//send message (25% -> url, 75% -> normal)
+			if (randomInt(1, 100) <= 25){
+				var urlBlocks = customModals.messageURLServiceModal.blocks;
+				urlBlocks[0].text = stretchingURLList[randomInt(1, stretchingURLList.length) - 1];
+
+				await libKakaoWork.sendMessage({
+					conversationId: conversation.id,
+					text: '스트레칭 타임!',
+					blocks: urlBlocks,
+				});
+			}
+			else{
+				await libKakaoWork.sendMessage({
+					conversationId: conversation.id,
+					text: '목펴랏!',
+					blocks: messageServeiceModalMap[Number(user.level)].blocks,
+				});
+			}
         }
     }
 }
@@ -149,25 +172,18 @@ async function pairingUser(){
 		selectedPair = await getRandomUserIDList(unpairedUserIDList);
 	}
 	if(selectedPair.length){
-		console.log(selectedPair);
 		delete unpairedUser[selectedPair[0]];
 		delete unpairedUser[selectedPair[1]];
 		
-		const conversations = await Promise.all(
-			selectedPair.map((user) => libKakaoWork.openConversations({ userId: user }))
-		);
-		const messages = await Promise.all(
-			conversations.map((conversation,index) => {
-				let message = {
-					conversationId: conversation.id,
-					text: '가랏!',
-					blocks: customModals.pairingServiceModal.blocks,
-				}
-				console.log(conversation,index);
-				message.blocks[0].text = serviceRegisteredUser[selectedPair[(index+1)%2]].name+"님에게 일일 거북씨가 되어보세요!";
-				libKakaoWork.sendMessage(message);
-			})
-		);
+		const conversation = await libKakaoWork.openConversations({ userId: selectedPair[0] });
+		let message = {
+			conversationId: conversation.id,
+			text: '가랏!',
+			blocks: customModals.pairingServiceModal.blocks,
+		};
+		message.blocks[0].text = serviceRegisteredUser[selectedPair[1]].name+"님에게 일일 거북씨가 되어보세요!";
+		libKakaoWork.sendMessage(message);
+		console.log(unpairedUser);
 	}
 }
 

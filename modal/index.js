@@ -260,6 +260,18 @@ messageServiceModal_1 = {
 }
 
 
+messageURLServiceModal = {
+  "text": "목펴랏!!",
+  "blocks": [
+    {
+      "type": "text",
+      "text": "url here",
+      "markdown": true
+    }
+  ]
+}
+
+
 dynamicServiceRegisterModal = {
     "title": "나의 거북씨🐢",
     "accept": "입니다.",
