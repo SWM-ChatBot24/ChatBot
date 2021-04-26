@@ -54,14 +54,25 @@ function deleteUser(user){
 	// console.log(unpairedUser);
 }
 
+//get random int between min & max
+function randomInt(min, max){
+	return Math.round(Math.random() * (max - min)) + min;
+}
+
 //거북이 등장하고 난 뒤 NextUpdateTime 초기화
 function updateNextTime(user){
 	switch (user.level){
-		 case '1' : user.NextUpdateTime += Math.round(Math.random() * (60) + 150) * 60000; break; // 2시간 반 ~ 3시간 반
-		 case '2' : user.NextUpdateTime += Math.round(Math.random() * (60) + 90) * 60000; break; // 1시간 반 ~ 2시간 반
-		 case '3' : user.NextUpdateTime += Math.round(Math.random() * (60) + 30) * 60000; break; // 30분 ~ 1시간 반
+		case '1' : user.NextUpdateTime += randomInt(150, 210) * 60000; break; // 2시간 반 ~ 3시간 반
+		case '2' : user.NextUpdateTime += randomInt(90, 150)  * 60000; break; // 1시간 반 ~ 2시간 반
+		case '3' : user.NextUpdateTime += randomInt(30, 90)  * 60000; break; // 30분 ~ 1시간 반
 	}
 }
+
+let stretchingURLList = [
+	'https://youtu.be/XT1dHyI86eQ',
+	'https://youtu.be/YFWxji9yGss',
+	'https://youtu.be/TiMJOt6stPE',
+]
 
 /**
  * Compare NowTime with Next Update Time
@@ -82,12 +93,21 @@ async function processUpdateTime(){
 			//open conversation
 			const conversation = await libKakaoWork.openConversations({ userId: id });
 			
-			//send message
-			await libKakaoWork.sendMessage({
-				conversationId: conversation.id,
-				text: '목펴랏!',
-				blocks: customModals.messageServiceModal.blocks,
-			});
+			//send message (25% -> url, 75% -> normal)
+			if (randomInt(1, 100) <= 25){
+				await libKakaoWork.sendMessage({
+					conversationId: conversation.id,
+					text: stretchingURLList[randomInt(1, stretchingURLList.length) - 1],
+					blocks: customModals.messageServiceModal.blocks,
+				});
+			}
+			else{
+				await libKakaoWork.sendMessage({
+					conversationId: conversation.id,
+					text: '목펴랏!',
+					blocks: customModals.messageServiceModal.blocks,
+				});
+			}
         }
     }
 }
