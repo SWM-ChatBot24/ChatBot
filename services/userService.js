@@ -14,6 +14,27 @@ const customModals = require("../modal")
 let serviceRegisteredUser = {} 
 let unpairedUser = {}
 
+// modal mapping 
+
+const registerModalMap = [
+	0,
+	customModals.registerCompleteModal_1,
+	customModals.registerCompleteModal_2,
+	customModals.registerCompleteModal_3,
+]
+const messageServeiceModalMap = [
+	0,
+	customModals.messageServiceModal_1,
+	customModals.messageServiceModal_2,
+	customModals.messageServiceModal_3,
+]	
+const levelChangeModalMap = [
+	0,
+	customModals.levelChangeModal_1,
+	customModals.levelChangeModal_2,
+	customModals.levelChangeModal_3,
+]
+
 //push user to serviceRegisteredUser
 function checkAndAppendUser(user, message){
 	if(serviceRegisteredUser[user.id] === undefined){ // check null
@@ -23,18 +44,17 @@ function checkAndAppendUser(user, message){
 		libKakaoWork.sendMessage({
 		  conversationId: message.conversation_id,
 		  text: '안녕하세요, 친절한 거북씨에요',
-		  blocks: customModals.registerCompleteModal.blocks
+		  blocks: registerModalMap[Number(user.level)].blocks
 		});
 		
 	}else{
 		// level update
 		serviceRegisteredUser[user.id].level = user.level;
 		
-		customModals.levelChangeModal.blocks[1].text = "현재 난이도: " + user.level;
 		libKakaoWork.sendMessage({
 		  conversationId: message.conversation_id,
 		  text: '안녕하세요, 친절한 거북씨에요',
-		  blocks: customModals.levelChangeModal.blocks
+		  blocks: levelChangeModalMap[[Number(user.level)]].blocks
 		});
 	}
 }
@@ -86,7 +106,7 @@ function updateNextTime(user){
 			await libKakaoWork.sendMessage({
 				conversationId: conversation.id,
 				text: '목펴랏!',
-				blocks: customModals.messageServiceModal.blocks,
+				blocks: messageServeiceModalMap[Number(user.level)].blocks,
 			});
         }
     }
