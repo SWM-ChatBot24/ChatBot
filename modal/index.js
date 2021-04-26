@@ -144,6 +144,18 @@ messageServiceModal = {
 }
 
 
+messageURLServiceModal = {
+  "text": "목펴랏!!",
+  "blocks": [
+    {
+      "type": "text",
+      "text": "url here",
+      "markdown": true
+    }
+  ]
+}
+
+
 dynamicServiceRegisterModal = {
     "title": "나의 거북씨🐢",
     "accept": "입니다.",
@@ -206,3 +218,4 @@ module.exports.serviceRegisterModal = serviceRegisterModal;
 module.exports.pairingServiceModal = pairingServiceModal;
 module.exports.messageServiceModal = messageServiceModal;
 module.exports.dynamicServiceRegisterModal = dynamicServiceRegisterModal;
+module.exports.messageURLServiceModal = messageURLServiceModal;

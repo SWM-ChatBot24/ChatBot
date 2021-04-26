@@ -95,10 +95,13 @@ async function processUpdateTime(){
 			
 			//send message (25% -> url, 75% -> normal)
 			if (randomInt(1, 100) <= 25){
+				var urlBlocks = customModals.messageURLServiceModal.blocks;
+				urlBlocks[0].text = stretchingURLList[randomInt(1, stretchingURLList.length) - 1];
+
 				await libKakaoWork.sendMessage({
 					conversationId: conversation.id,
-					text: stretchingURLList[randomInt(1, stretchingURLList.length) - 1],
-					blocks: customModals.messageServiceModal.blocks,
+					text: '스트레칭 타임!',
+					blocks: urlBlocks,
 				});
 			}
 			else{
