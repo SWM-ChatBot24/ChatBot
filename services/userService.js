@@ -42,9 +42,9 @@ function checkAndAppendUser(user, message){
 		appendUser(user);
 		// send message to user
 		libKakaoWork.sendMessage({
-		  conversationId: message.conversation_id,
-		  text: '안녕하세요, 친절한 거북씨에요',
-		  blocks: registerModalMap[Number(user.level)].blocks
+			conversationId: message.conversation_id,
+			text: '안녕하세요, 친절한 거북씨에요',
+			blocks: registerModalMap[Number(user.level)].blocks
 		});
 		
 	}else{
@@ -52,9 +52,9 @@ function checkAndAppendUser(user, message){
 		serviceRegisteredUser[user.id].level = user.level;
 		
 		libKakaoWork.sendMessage({
-		  conversationId: message.conversation_id,
-		  text: '안녕하세요, 친절한 거북씨에요',
-		  blocks: levelChangeModalMap[[Number(user.level)]].blocks
+			conversationId: message.conversation_id,
+			text: '안녕하세요, 친절한 거북씨에요',
+			blocks: levelChangeModalMap[[Number(user.level)]].blocks
 		});
 	}
 }
@@ -179,10 +179,11 @@ async function pairingUser(){
 		console.log(conversation);
 		let message = {
 			conversationId: conversation.id,
-			text: '가랏!',
+			text: customModals.pairingServiceModal.text,
 			blocks: customModals.pairingServiceModal.blocks,
 		};
 		message.blocks[2].text = serviceRegisteredUser[selectedPair[1]].name+" 님의 일일 거북씨 입니다.";
+		message.blocks[4].value = selectedPair[1];
 		libKakaoWork.sendMessage(message);
 	}
 }

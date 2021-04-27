@@ -221,7 +221,29 @@ pairingServiceModal = {
 	  "type": "text",
 	  "text": "자세를 바로 하라는 메세지와 함께 간단한 응원글을 보내주세요!",
 	  "markdown": true
-	}
+	},
+  { // value는 임의로 설정했음!!!
+    "type": "button",
+    "text": "button",
+    "style": "default",
+    "action_type": "call_modal",
+    "value": "2",
+  }
+  ]
+}
+
+pairingMessageModal = {
+  "title": "modal title",
+  "accept": "발송",
+  "decline": "취소",
+  "value": "",
+  "blocks": [
+    {
+      "type": "input",
+      "name": "message_text",
+      "required": false,
+      "placeholder": "내용을 입력해주세요"
+    }
   ]
 }
 
@@ -276,7 +298,7 @@ dynamicServiceRegisterModal = {
     "title": "나의 거북씨🐢",
     "accept": "입니다.",
     "decline": "아닙니다.",
-    "value": "my_turtle_is",
+    "value": "",
     "blocks": [
         {
             "type": "label",
@@ -341,3 +363,4 @@ module.exports.messageServiceModal_2 = messageServiceModal_2;
 module.exports.messageServiceModal_3 = messageServiceModal_3;
 module.exports.dynamicServiceRegisterModal = dynamicServiceRegisterModal;
 module.exports.messageURLServiceModal = messageURLServiceModal;
+module.exports.pairingMessageModal = pairingMessageModal;
