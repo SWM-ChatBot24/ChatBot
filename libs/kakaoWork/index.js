@@ -45,7 +45,6 @@ exports.getUserInfo = async (userId) => {
 			user_id: userId
 		}
 	});
-	
     return res.data.user;
 };
 

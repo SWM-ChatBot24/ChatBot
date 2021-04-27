@@ -66,6 +66,29 @@ serviceRegisterModal = {
     ]
 }
 
+serviceRegisterAgainModal = {
+	"text": "안녕~ 거북이 친구!",
+	"blocks": [
+		{
+		  "type": "image_link",
+		  "url": "https://chatbot-fsmrz.run.goorm.io/static/reboot_turtle.png"
+		},
+		{
+		  "type": "text",
+		  "text": "다시 찾아와 주었군요!\n나의 거북씨를 다시 만나볼까요?",
+		  "markdown": true
+		},
+		  {
+			  type: "button",
+			  text: "나의 거북씨 다시 만나기 🐢",
+			  style : "default",
+			  action_type : "call_modal",
+			  value: "1",
+			  action_name: 'start'
+		  },
+    ]
+}
+
 // 이거 레벨마다 다른 텍스트 나오게 하고 싶다...!
 registerCompleteModal_3 = {
   "text": "나는! 빡센 거북씨!",
@@ -195,6 +218,14 @@ registerRejectModal = {
       "type": "text",
       "text": "오늘은 푹~ 쉬고, 내일은 나를 꼭 찾아줘 거북이 친구!",
       "markdown": true
+    },
+	{
+      "type": "divider"
+    },
+	{
+      "type": "text",
+      "text": "거북씨를 다시 만나고 싶으면, 상단 '오늘의 거북씨'에서 다시 선택해주세요!",
+      "markdown": true
     }
   ]
 }
@@ -221,7 +252,47 @@ pairingServiceModal = {
 	  "type": "text",
 	  "text": "자세를 바로 하라는 메세지와 함께 간단한 응원글을 보내주세요!",
 	  "markdown": true
-	}
+	},
+	{
+      "type": "button",
+      "text": "응원글 보내기",
+      "style": "default"
+    }
+  ]
+}
+
+pairingSendingModal ={
+  "title": "일일 거북씨의 응원",
+  "accept": "보내기",
+  "decline": "좀 더 고민하기",
+  "value": "one day turtle",
+  "blocks": [
+    {
+      "type": "label",
+      "text": "CHEER UP, TURTLE..! 🐢",
+      "markdown": true
+    },
+    {
+      "type": "input",
+      "name": "cheerupSaying",
+      "required": true,
+      "placeholder": "일일 거북씨가 되어 응원글을 남겨주세요!"
+    }
+  ]
+}
+
+pairingReceivingModal={
+  "text": "배달부 거북씨 도착",
+  "blocks": [
+	{
+      "type": "image_link",
+      "url": "https://chatbot-fsmrz.run.goorm.io/static/delivery_turtle.png"
+    },
+    {
+      "type": "text",
+      "text": "메세지 내용",
+      "markdown": true
+    }
   ]
 }
 
@@ -321,10 +392,253 @@ dynamicServiceRegisterModal = {
             ],
             "required": true,
             "placeholder": "어떤 거북씨일까요?"
+        },
+		{
+            "type": "label",
+            "text": "거북이 출근 시간!",
+            "markdown": true
+        },
+        {
+            "type": "select",
+            "name": "start_time",
+            "options": [
+                {
+                    "text": "0시",
+                    "value": "0"
+                },
+                {
+                    "text": "1시",
+                    "value": "1"
+                },
+                {
+                    "text": "2시",
+                    "value": "2"
+                },
+                {
+                    "text": "3시",
+                    "value": "3"
+                },
+                {
+                    "text": "4시",
+                    "value": "4"
+                },
+                {
+                    "text": "5시",
+                    "value": "5"
+                },
+                {
+                    "text": "6시",
+                    "value": "6"
+                },
+                {
+                    "text": "7시",
+                    "value": "7"
+                },
+                {
+                    "text": "8시",
+                    "value": "8"
+                },
+                {
+                    "text": "9시",
+                    "value": "9"
+                },
+                {
+                    "text": "10시",
+                    "value": "10"
+                },
+                {
+                    "text": "11시",
+                    "value": "11"
+                },
+                {
+                    "text": "12시",
+                    "value": "12"
+                },
+                {
+                    "text": "13시",
+                    "value": "13"
+                },
+                {
+                    "text": "14시",
+                    "value": "14"
+                },
+                {
+                    "text": "15시",
+                    "value": "15"
+                },
+                {
+                    "text": "16시",
+                    "value": "16"
+                },
+                {
+                    "text": "17시",
+                    "value": "17"
+                },
+                {
+                    "text": "18시",
+                    "value": "18"
+                },
+                {
+                    "text": "19시",
+                    "value": "19"
+                },
+                {
+                    "text": "20시",
+                    "value": "20"
+                },
+                {
+                    "text": "21시",
+                    "value": "21"
+                },
+                {
+                    "text": "22시",
+                    "value": "22"
+                },
+                {
+                    "text": "23시",
+                    "value": "23"
+                }
+            ],
+            "required": true,
+            "placeholder": "알림을 언제부터 받을까요?"
+        },
+		{
+            "type": "label",
+            "text": "거북이 퇴근 시간!",
+            "markdown": true
+        },
+        {
+            "type": "select",
+            "name": "end_time",
+            "options": [
+                {
+                    "text": "0시",
+                    "value": "0"
+                },
+                {
+                    "text": "1시",
+                    "value": "1"
+                },
+                {
+                    "text": "2시",
+                    "value": "2"
+                },
+                {
+                    "text": "3시",
+                    "value": "3"
+                },
+                {
+                    "text": "4시",
+                    "value": "4"
+                },
+                {
+                    "text": "5시",
+                    "value": "5"
+                },
+                {
+                    "text": "6시",
+                    "value": "6"
+                },
+                {
+                    "text": "7시",
+                    "value": "7"
+                },
+                {
+                    "text": "8시",
+                    "value": "8"
+                },
+                {
+                    "text": "9시",
+                    "value": "9"
+                },
+                {
+                    "text": "10시",
+                    "value": "10"
+                },
+                {
+                    "text": "11시",
+                    "value": "11"
+                },
+                {
+                    "text": "12시",
+                    "value": "12"
+                },
+                {
+                    "text": "13시",
+                    "value": "13"
+                },
+                {
+                    "text": "14시",
+                    "value": "14"
+                },
+                {
+                    "text": "15시",
+                    "value": "15"
+                },
+                {
+                    "text": "16시",
+                    "value": "16"
+                },
+                {
+                    "text": "17시",
+                    "value": "17"
+                },
+                {
+                    "text": "18시",
+                    "value": "18"
+                },
+                {
+                    "text": "19시",
+                    "value": "19"
+                },
+                {
+                    "text": "20시",
+                    "value": "20"
+                },
+                {
+                    "text": "21시",
+                    "value": "21"
+                },
+                {
+                    "text": "22시",
+                    "value": "22"
+                },
+                {
+                    "text": "23시",
+                    "value": "23"
+                }
+            ],
+            "required": true,
+            "placeholder": "거북씨를 언제 놓아줄까요?"
+        },
+		{
+            "type": "label",
+            "text": "퇴근시간이 출근시간보다 빠른 경우, 거북씨는 밤을 새고 퇴근합니다\n출근시간과 퇴근시간이 같으면, 거북씨는 쉴 수 없습니다!!",
+            "markdown": true
         }
     ]
 }
 
+workStartAlarmModal = {
+  "text": "거북씨 출근도장 쾅!",
+  "blocks": [
+    {
+      "type": "text",
+      "text": "거북씨가 출근했어요! 오늘도 거북씨와 함께 목 편한 하루~",
+      "markdown": true
+    }
+  ]
+}
+workEndAlarmModal = {
+  "text": "거북씨 퇴근도장 쾅!",
+  "blocks": [
+    {
+      "type": "text",
+      "text": "거북씨는 이제 자유에요!",
+      "markdown": true
+    }
+  ]
+}
 
 
 module.exports.registerCompleteModal_1 = registerCompleteModal_1;
@@ -335,9 +649,14 @@ module.exports.levelChangeModal_1 = levelChangeModal_1;
 module.exports.levelChangeModal_2 = levelChangeModal_2;
 module.exports.levelChangeModal_3 = levelChangeModal_3;
 module.exports.serviceRegisterModal = serviceRegisterModal;
+module.exports.serviceRegisterAgainModal = serviceRegisterAgainModal;
 module.exports.pairingServiceModal = pairingServiceModal;
+module.exports.pairingSendingModal = pairingSendingModal;
+module.exports.pairingReceivingModal = pairingReceivingModal;
 module.exports.messageServiceModal_1 = messageServiceModal_1;
 module.exports.messageServiceModal_2 = messageServiceModal_2;
 module.exports.messageServiceModal_3 = messageServiceModal_3;
 module.exports.dynamicServiceRegisterModal = dynamicServiceRegisterModal;
 module.exports.messageURLServiceModal = messageURLServiceModal;
+module.exports.workStartAlarmModal = workStartAlarmModal;
+module.exports.workEndAlarmModal = workEndAlarmModal;
