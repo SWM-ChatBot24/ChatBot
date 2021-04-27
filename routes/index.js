@@ -96,6 +96,9 @@ router.post('/callback', async (req, res, next) => {
 		case '3':
 			newuser.level = actions.select_turtle;
 			newuser.NextUpdateTime = Date.now();
+			newuser.startTime = actions.start_time *= 1;
+			newuser.endTime = actions.end_time *= 1;
+			newuser.working = 0;
 			userService.updateNextTime(newuser);
 			userService.checkAndAppendUser(newuser, message);	
 			break;
