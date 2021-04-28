@@ -25,11 +25,11 @@ const registerModalMap = [
     customModals.registerCompleteModal_2,
     customModals.registerCompleteModal_3,
 ];
-const messageServeiceModalMap = [
-    0,
-    customModals.messageServiceModal_1,
-    customModals.messageServiceModal_2,
-    customModals.messageServiceModal_3,
+const messageServiceModalMap = [
+	0,
+	customModals.messageServiceModal_1,
+	customModals.messageServiceModal_2,
+	customModals.messageServiceModal_3,
 ];
 const levelChangeModalMap = [
     0,
@@ -109,8 +109,6 @@ let stretchingThumbnailList = [
 	'http://img.youtube.com/vi/TiMJOt6stPE/0.jpg',
 ];
 
-let cheerupSayingList = [];
-
 /**
  * Compare NowTime with Next Update Time
  * Send message to target
@@ -126,19 +124,34 @@ async function processUpdateTime() {
 
         //time not requested by user
         if (
-            user.startTime < user.endTime &&
+            (user.startTime < user.endTime &&
             ((today.getHours() + 9) % 24 < user.startTime ||
-                (today.getHours() + 9) % 24 >= user.endTime)
-        )
-            continue;
-        if (
-            user.startTime > user.endTime &&
+                (today.getHours() + 9) % 24 >= user.endTime))
+			||
+			(user.startTime > user.endTime &&
             (today.getHours() + 9) % 24 >= user.endTime &&
-            (today.getHours() + 9) % 24 < user.startTime
-        )
-            continue;
+            (today.getHours() + 9) % 24 < user.startTime)
+        ){
+			//거북이 퇴근 알림
+			if (
+				(today.getHours() + 9) % 24 >= user.endTime &&
+				user.working == 1 &&
+				user.startTime != user.endTime
+			) {
+				user.working = 0;
+				//open conversation
+				const conversation = await libKakaoWork.openConversations({ userId: id });
+				var messageBlock = customModals.workEndAlarmModal.blocks;
+				await libKakaoWork.sendMessage({
+					conversationId: conversation.id,
+					text: '거북씨 퇴근 보고',
+					blocks: messageBlock,
+				});
+			}
+			continue;
+		}
 
-        //거북이 출퇴근 알림
+        //거북이 출근 알림
         if ((today.getHours() + 9) % 24 >= user.startTime && user.working == 0) {
             user.working = 1;
             //open conversation
@@ -150,21 +163,7 @@ async function processUpdateTime() {
                 blocks: messageBlock,
             });
         }
-        if (
-            (today.getHours() + 9) % 24 >= user.endTime &&
-            user.working == 1 &&
-            user.startTime != user.endTime
-        ) {
-            user.working = 0;
-            //open conversation
-            const conversation = await libKakaoWork.openConversations({ userId: id });
-            var messageBlock = customModals.workEndAlarmModal.blocks;
-            await libKakaoWork.sendMessage({
-                conversationId: conversation.id,
-                text: '거북씨 퇴근 보고',
-                blocks: messageBlock,
-            });
-        }
+        
 
         if (nowTime >= nextUpdateTime) {
             //update next time
@@ -187,10 +186,15 @@ async function processUpdateTime() {
                     blocks: urlBlocks,
                 });
             } else {
+				var messageBlock = customModals.messageServiceModal.blocks;
+				var messageList = messageServiceModalMap[user.level];
+				
+				messageBlock[0].text = messageList[randomInt(1, messageList.length) - 1];
+				
                 await libKakaoWork.sendMessage({
                     conversationId: conversation.id,
                     text: '목펴랏!',
-                    blocks: messageServeiceModalMap[Number(user.level)].blocks,
+                    blocks: messageBlock,
                 });
             }
         }

@@ -48,7 +48,8 @@ serviceRegisterModal = {
 	"blocks": [
 		{
 		  "type": "image_link",
-		  "url": "https://chatbot-fsmrz.run.goorm.io/static/today_turtle.png"
+		  // "url": "https://chatbot-fsmrz.run.goorm.io/static/today_turtle.png"
+			"url": "https://media.giphy.com/media/Vc08GUgkUNZw6YGMjh/giphy.gif"
 		},
 		{
 		  "type": "text",
@@ -212,7 +213,8 @@ registerRejectModal = {
   "blocks": [
     {
       "type": "image_link",
-      "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle_zero.png"
+      // "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle_zero.png"
+		"url" : "https://media.giphy.com/media/3ornjM1ow4vbrifDAA/giphy.gif"
     },
     {
       "type": "text",
@@ -300,29 +302,25 @@ pairingReceivingModal={
 }
 
 // 이거 배열 안에 여러개 두고 랜덤하게 나오도록!
-messageServiceModal_3 = {
-  "text": "친구! 거북이로 진화 중이야? 목 펴, 목 펴! 😎",
-  "blocks": [
-    {
-      "type": "text",
-      "text": "친구! 거북이로 진화 중이야? 목 펴, 목 펴! 😎",
-      "markdown": true
-    }
-  ]
-}
+messageServiceModal_3 = [
+	"친구! 거북이로 진화 중이야? 목 펴, 목 펴! 😎",
+	"3레벨 메세지 2",
+	"3레벨 메세지 3",
+];
 
-messageServiceModal_2 = {
-  "text": "친구! 목이 굽었어! 바르게 앉자! 😊",
-  "blocks": [
-    {
-      "type": "text",
-      "text": "친구! 목이 굽었어! 바르게 앉자! 😊",
-      "markdown": true
-    }
-  ]
-}
+messageServiceModal_2 = [
+	"친구! 목이 굽었어! 바르게 앉자! 😊",
+	"2레벨 메세지 2",
+	"2레벨 메세지 3",
+];
 
-messageServiceModal_1 = {
+messageServiceModal_1 = [
+	"친구~ 스트레칭 한 번 하고 일하자 🙂",
+	"1레벨 메세지 2",
+	"1레벨 메세지 3",
+];
+
+messageServiceModal = {
   "text": "친구~ 스트레칭 한 번 하고 일하자 🙂",
   "blocks": [
     {
@@ -331,8 +329,7 @@ messageServiceModal_1 = {
       "markdown": true
     }
   ]
-}
-
+};
 
 messageURLServiceModal = {
   "text": "스트레칭 거북씨",
@@ -667,6 +664,7 @@ module.exports.pairingReceivingModal = pairingReceivingModal;
 module.exports.messageServiceModal_1 = messageServiceModal_1;
 module.exports.messageServiceModal_2 = messageServiceModal_2;
 module.exports.messageServiceModal_3 = messageServiceModal_3;
+module.exports.messageServiceModal = messageServiceModal;
 module.exports.dynamicServiceRegisterModal = dynamicServiceRegisterModal;
 module.exports.messageURLServiceModal = messageURLServiceModal;
 module.exports.workStartAlarmModal = workStartAlarmModal;
