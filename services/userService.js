@@ -62,6 +62,7 @@ function checkAndAppendUser(user, message) {
     }
 }
 
+
 function appendUser(user) {
     serviceRegisteredUser[user.id] = user;
     unpairedUser[user.id] = user.id;
@@ -101,12 +102,20 @@ let stretchingURLList = [
     'https://youtu.be/XT1dHyI86eQ',
     'https://youtu.be/YFWxji9yGss',
     'https://youtu.be/TiMJOt6stPE',
+	'https://youtu.be/G32r7kx-MTw',
+	'https://youtu.be/oYaal-ir9cc',
+	'https://youtu.be/3aTPapvWpKs',
+	'https://youtu.be/ZW-T79DASe8',
 ];
 
 let stretchingThumbnailList = [
 	'http://img.youtube.com/vi/XT1dHyI86eQ/0.jpg',
 	'http://img.youtube.com/vi/YFWxji9yGss/0.jpg',
 	'http://img.youtube.com/vi/TiMJOt6stPE/0.jpg',
+	'http://img.youtube.com/vi/G32r7kx-MTw/0.jpg',
+	'http://img.youtube.com/vi/oYaal-ir9cc/0.jpg',
+	'http://img.youtube.com/vi/3aTPapvWpKs/0.jpg',
+	'http://img.youtube.com/vi/ZW-T79DASe8/0.jpg',
 ];
 
 /**
@@ -205,19 +214,25 @@ function getUnpairedUserIDList() {
     return Object.keys(unpairedUser);
 }
 
-//generate random index
-function getRandomIndex(range) {
-    return (range * Math.random()) << 0;
+function isWorking(user) {
+	const nowTime = Date.now();
+	let today = new Date();
+	if ((user.startTime < user.endTime &&((today.getHours() + 9) % 24 < user.startTime || (today.getHours() + 9) % 24 >= user.endTime)) 
+		|| (user.startTime > user.endTime && (today.getHours() + 9) % 24 >= user.endTime && (today.getHours() + 9) % 24 < user.startTime)){
+		return true;
+	}
+	return false;
 }
 
 //generate a pair between active users
-async function getRandomUserIDList(users) {
-    const randomUserIDList = [users[0]];
-    let randomIndex = 0;
-    while (randomIndex == 0) {
-        randomIndex = await getRandomIndex(users.length);
-    }
-    randomUserIDList.push(users[randomIndex]);
+async function getRandomUserIDList(userIDList) {
+    const randomUserIDList = [];
+	userIDList.forEach(userId => {
+		const user = serviceRegisteredUser[userId];
+		if(await isWorking(user)){
+			randomUserIDList.push(userId);
+		}
+	});
 
     return randomUserIDList;
 }
@@ -232,19 +247,16 @@ async function getRandomUserIDList(users) {
  */
 async function pairingUser() {
     const unpairedUserIDList = getUnpairedUserIDList();
-    let selectedPair = [];
-
-    if (unpairedUserIDList.length > 1) {
-        selectedPair = await getRandomUserIDList(unpairedUserIDList);
-    }
-    if (selectedPair.length) {
+    const selectedPair = await getRandomUserIDList(unpairedUserIDList);
+	
+    if (selectedPair.length > 1) {
         delete unpairedUser[selectedPair[0]];
         delete unpairedUser[selectedPair[1]];
 
         const conversation = await libKakaoWork.openConversations({ userId: selectedPair[0] });
         let message = {
             conversationId: conversation.id,
-            text: '가랏!',
+            text: customModals.pairingServiceModal.text,
             blocks: customModals.pairingServiceModal.blocks,
         };
         message.blocks[2].text =

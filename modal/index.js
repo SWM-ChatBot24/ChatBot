@@ -226,13 +226,15 @@ registerRejectModal = {
     },
 	{
       "type": "text",
-      "text": "거북씨를 다시 만나고 싶으면, 아래 '다시 만난 거북씨'에서 다시 선택해주세요!",
+      "text": "거북씨를 다시 만나고 싶으면, 아래 '다시 만난 거북씨'를 클릭해주세요!",
       "markdown": true
     },
 	{
       "type": "button",
       "text": "다시 만난 거북씨 🐢",
-      "style": "default"
+      "style": "default",
+	  "action_type" : "call_modal",
+	  "value" : "1",
     }
   ]
 }
@@ -309,20 +311,20 @@ pairingReceivingModal={
 // 이거 배열 안에 여러개 두고 랜덤하게 나오도록!
 messageServiceModal_3 = [
 	"친구! 거북이로 진화 중이야? 목 펴, 목 펴! 😎",
-	"3레벨 메세지 2",
-	"3레벨 메세지 3",
+	"헤이~ 친구! 티끌 모아 거북이라는 말, 잊지마! 😎",
+	"인간인데 목은 거북이...? 이상하다구!!! 😎",
 ];
 
 messageServiceModal_2 = [
-	"친구! 목이 굽었어! 바르게 앉자! 😊",
-	"2레벨 메세지 2",
-	"2레벨 메세지 3",
+	"친구! 목이 굽었어! 바르게 펴자! 😊",
+	"친구, 지금 바른 자세야? 다시 고쳐 앉자! 😊",
+	"탈거북화 잊지마, 친구!!! 😊",
 ];
 
 messageServiceModal_1 = [
 	"친구~ 스트레칭 한 번 하고 일하자 🙂",
-	"1레벨 메세지 2",
-	"1레벨 메세지 3",
+	"친구, 몸을 뒤로 조금만 빼는 건 어때? 🙂",
+	"친구야! 목 말고, 화면을 앞으로 땡겨서 보는 게 좋아 🙂",
 ];
 
 messageServiceModal = {
@@ -401,6 +403,10 @@ dynamicServiceRegisterModal = {
             "type": "select",
             "name": "start_time",
             "options": [
+				{
+                    "text": "휴식이라구용!",
+                    "value": "-1"
+                },
                 {
                     "text": "0시",
                     "value": "0"
@@ -510,6 +516,10 @@ dynamicServiceRegisterModal = {
             "type": "select",
             "name": "end_time",
             "options": [
+				{
+                    "text": "휴식이라니까용!",
+                    "value": "-1"
+                },
                 {
                     "text": "0시",
                     "value": "0"
@@ -612,7 +622,7 @@ dynamicServiceRegisterModal = {
         },
 		{
             "type": "label",
-            "text": "퇴근시간이 출근시간보다 빠른 경우, 거북씨는 밤을 새고 퇴근합니다.\n출근시간과 퇴근시간이 같으면, 거북씨는 쉴 수 없습니다!!",
+            "text": "'출근시간 <= 퇴근시간'을 지켜주세요!\n휴식하는 거북씨일 때도 출근 및 퇴근 시간을 선택해주세요!",
             "markdown": true
         }
     ]

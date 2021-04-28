@@ -36,7 +36,6 @@ router.get('/', async (req, res, next) => {
 // routes/index.js
 router.post('/request', async (req, res, next) => {
 	const { message, value } = req.body;
-	console.log("req: ", req.body);
 	switch (value) {
 		case '1': // register service
 			res.json({
@@ -62,7 +61,6 @@ router.post('/request', async (req, res, next) => {
 router.post('/callback', async (req, res, next) => {
 	const { message, action_name, actions, action_time, value, react_user_id } = req.body; // 설문조사 결과 확인 (2)
 	const newuser = await libKakaoWork.getUserInfo(react_user_id);
-	console.log(value)
     
 	if(value) {	  
 		const conversation = await libKakaoWork.openConversations({ userId: value });
