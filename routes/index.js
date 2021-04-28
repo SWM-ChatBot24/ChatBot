@@ -62,9 +62,8 @@ router.post('/request', async (req, res, next) => {
 router.post('/callback', async (req, res, next) => {
 	const { message, action_name, actions, action_time, value, react_user_id } = req.body; // 설문조사 결과 확인 (2)
 	const newuser = await libKakaoWork.getUserInfo(react_user_id);
-
-    // before dynamic blocks used
-	// ** deprecated **
+	console.log(value)
+    
 	if(value) {	  
 		const conversation = await libKakaoWork.openConversations({ userId: value });
 		await libKakaoWork.sendMessage({

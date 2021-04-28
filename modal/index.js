@@ -48,8 +48,8 @@ serviceRegisterModal = {
 	"blocks": [
 		{
 		  "type": "image_link",
-		  // "url": "https://chatbot-fsmrz.run.goorm.io/static/today_turtle.png"
-			"url": "https://media.giphy.com/media/Vc08GUgkUNZw6YGMjh/giphy.gif"
+		  "url": "https://chatbot-fsmrz.run.goorm.io/static/today_turtle.png"
+			// "url": "https://media.giphy.com/media/Vc08GUgkUNZw6YGMjh/giphy.gif"
 		},
 		{
 		  "type": "text",
@@ -86,7 +86,7 @@ serviceRegisterAgainModal = {
 			  action_type : "call_modal",
 			  value: "1",
 			  action_name: 'start'
-		  },
+		  }
     ]
 }
 
@@ -213,8 +213,8 @@ registerRejectModal = {
   "blocks": [
     {
       "type": "image_link",
-      // "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle_zero.png"
-		"url" : "https://media.giphy.com/media/3ornjM1ow4vbrifDAA/giphy.gif"
+      "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle_zero.png"
+		// "url" : "https://media.giphy.com/media/3ornjM1ow4vbrifDAA/giphy.gif"
     },
     {
       "type": "text",
@@ -226,8 +226,13 @@ registerRejectModal = {
     },
 	{
       "type": "text",
-      "text": "거북씨를 다시 만나고 싶으면, 상단 '오늘의 거북씨'에서 다시 선택해주세요!",
+      "text": "거북씨를 다시 만나고 싶으면, 아래 '다시 만난 거북씨'에서 다시 선택해주세요!",
       "markdown": true
+    },
+	{
+      "type": "button",
+      "text": "다시 만난 거북씨 🐢",
+      "style": "default"
     }
   ]
 }
@@ -259,7 +264,7 @@ pairingServiceModal = {
       "type": "button",
       "text": "응원글 보내기",
       "style": "default",
-      "value": "2",
+      "value": "",
 	  "action_type": "call_modal",
     }
   ]

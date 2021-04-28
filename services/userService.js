@@ -249,6 +249,7 @@ async function pairingUser() {
         };
         message.blocks[2].text =
             serviceRegisteredUser[selectedPair[1]].name + ' 님의 일일 거북씨 입니다.';
+		message.blocks[4].value = selectedPair[1];
         libKakaoWork.sendMessage(message);
     }
 }
