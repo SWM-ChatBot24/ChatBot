@@ -36,7 +36,7 @@ router.get('/', async (req, res, next) => {
 // routes/index.js
 router.post('/request', async (req, res, next) => {
 	const { message, value } = req.body;
-	
+	console.log("req: ", req.body);
 	switch (value) {
 		case '1': // register service
 			res.json({
@@ -47,11 +47,13 @@ router.post('/request', async (req, res, next) => {
 			console.log("yeah deactive");
 			break;
 		default:
-			let pairingMessageModal = customModals.pairingMessageModal;
+			let pairingMessageModal = customModals.pairingSendingModal;
+			console.log("sending message to : ", value, "from ");
 			pairingMessageModal.value = value;
 			res.json({
 				view: pairingMessageModal,
 			});
+			
 			break;
 	}
 });

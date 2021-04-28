@@ -236,7 +236,7 @@ pairingServiceModal = {
   "blocks": [
 	{
 	  "type": "image_link",
-	  "url": "https://chatbot-fsmrz.run.goorm.io/static/special_turtle.png"
+	  "url": "https://chatbot-fsmrz.run.goorm.io/static/send_turtle.png"
 	},
 	{
 	  "type": "text",
@@ -256,8 +256,9 @@ pairingServiceModal = {
 	{
       "type": "button",
       "text": "응원글 보내기",
-      "style": "default"
-      "value": "2"
+      "style": "default",
+      "value": "2",
+	  "action_type": "call_modal",
     }
   ]
 }
@@ -281,6 +282,7 @@ pairingSendingModal ={
     }
   ]
 }
+
 
 pairingReceivingModal={
   "text": "배달부 거북씨 도착",
@@ -333,13 +335,22 @@ messageServiceModal_1 = {
 
 
 messageURLServiceModal = {
-  "text": "목펴랏!!",
+  "text": "스트레칭 거북씨",
   "blocks": [
+    {
+      "type": "header",
+      "text": "거북씨! 스트레칭하고 일 해!",
+      "style": "yellow"
+    },
     {
       "type": "text",
       "text": "url here",
       "markdown": true
-    }
+	},
+    {
+      "type": "image_link",
+      "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle.png"
+	}
   ]
 }
 
@@ -350,21 +361,6 @@ dynamicServiceRegisterModal = {
     "decline": "아닙니다.",
     "value": "",
     "blocks": [
-        {
-            "type": "label",
-            "text": " ",
-            "markdown": true
-        },
-        {
-            "type": "label",
-            "text": " ",
-            "markdown": true
-        },
-        {
-            "type": "label",
-            "text": " ",
-            "markdown": true
-        },
         {
             "type": "label",
             "text": "나의 거북씨는요,",
@@ -396,7 +392,7 @@ dynamicServiceRegisterModal = {
         },
 		{
             "type": "label",
-            "text": "거북이 출근 시간!",
+            "text": "나의 거북씨 출근 시간은요",
             "markdown": true
         },
         {
@@ -505,7 +501,7 @@ dynamicServiceRegisterModal = {
         },
 		{
             "type": "label",
-            "text": "거북이 퇴근 시간!",
+            "text": "나의 거북씨 퇴근 시간은요",
             "markdown": true
         },
         {
@@ -610,11 +606,11 @@ dynamicServiceRegisterModal = {
                 }
             ],
             "required": true,
-            "placeholder": "거북씨를 언제 놓아줄까요?"
+            "placeholder": "알림을 언제까지 받을까요?"
         },
 		{
             "type": "label",
-            "text": "퇴근시간이 출근시간보다 빠른 경우, 거북씨는 밤을 새고 퇴근합니다\n출근시간과 퇴근시간이 같으면, 거북씨는 쉴 수 없습니다!!",
+            "text": "퇴근시간이 출근시간보다 빠른 경우, 거북씨는 밤을 새고 퇴근합니다.\n출근시간과 퇴근시간이 같으면, 거북씨는 쉴 수 없습니다!!",
             "markdown": true
         }
     ]
@@ -624,9 +620,16 @@ workStartAlarmModal = {
   "text": "거북씨 출근도장 쾅!",
   "blocks": [
     {
-      "type": "text",
-      "text": "거북씨가 출근했어요! 오늘도 거북씨와 함께 목 편한 하루~",
-      "markdown": true
+      "type": "section",
+      "content": {
+        "type": "text",
+        "text": "'출'근하자!\n'근'심걱정 없이!",
+        "markdown": true
+      },
+      "accessory": {
+        "type": "image_link",
+        "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle.png"
+      }
     }
   ]
 }
@@ -634,9 +637,16 @@ workEndAlarmModal = {
   "text": "거북씨 퇴근도장 쾅!",
   "blocks": [
     {
-      "type": "text",
-      "text": "거북씨는 이제 자유에요!",
-      "markdown": true
+      "type": "section",
+      "content": {
+        "type": "text",
+        "text": "'퇴'근하자!\n'근'심걱정 없이!",
+        "markdown": true
+      },
+      "accessory": {
+        "type": "image_link",
+        "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle.png"
+      }
     }
   ]
 }
@@ -659,6 +669,5 @@ module.exports.messageServiceModal_2 = messageServiceModal_2;
 module.exports.messageServiceModal_3 = messageServiceModal_3;
 module.exports.dynamicServiceRegisterModal = dynamicServiceRegisterModal;
 module.exports.messageURLServiceModal = messageURLServiceModal;
-module.exports.pairingMessageModal = pairingMessageModal;
 module.exports.workStartAlarmModal = workStartAlarmModal;
 module.exports.workEndAlarmModal = workEndAlarmModal;
