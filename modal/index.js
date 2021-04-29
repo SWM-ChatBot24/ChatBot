@@ -45,13 +45,6 @@ serviceRegisterModal = {
 
 serviceRegisterModal = {
 	"text": "안녕~ 거북이 친구!",
-	"blocks": [
-		{
-		  "type": "image_link",
-		  "url": "https://chatbot-fsmrz.run.goorm.io/static/today_turtle.gif"
-			// "url": "https://media.giphy.com/media/Vc08GUgkUNZw6YGMjh/giphy.gif"
-		},
-		{
   "blocks": [
 	{
 	  "type": "image_link",
