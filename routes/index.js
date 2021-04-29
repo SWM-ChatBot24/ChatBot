@@ -13,9 +13,9 @@ router.get('/', async (req, res, next) => {
 	//console.log(users);
 	
 	// 검색된 모든 유저에게 각각 채팅방 생성 (2)
-	// const conversations = await Promise.all(
-	// 	users.map((user) => libKakaoWork.openConversations({ userId: user.id }))
-	// );
+	const conversations = await Promise.all(
+		users.map((user) => libKakaoWork.openConversations({ userId: user.id }))
+	);
 	//console.log("conversations:: ", conversations);
 	// 생성된 채팅방에 메세지 전송 (3)
 	
@@ -36,7 +36,7 @@ router.get('/', async (req, res, next) => {
 	
 	res.json({
 		users,
-		// conversations,
+		conversations,
 		messages,
 	});
 });
