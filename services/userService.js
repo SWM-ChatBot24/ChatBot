@@ -43,7 +43,7 @@ const levelChangeModalMap = [
 function checkAndAppendUser(user, message) {
     if (serviceRegisteredUser[user.id] === undefined) { 
         // check null
-        console.log('new user!!');
+        // console.log('new user!!');
         appendUser(user);
         // send message to user
 		// if(userHistory[user.id] === undefined){
@@ -273,7 +273,7 @@ async function pairingUser() {
 }
 
 //Run functions every interval
-setInterval(pairingUser, 10000);
+setInterval(pairingUser, 600000);
 setInterval(processUpdateTime, 10000);
 
 module.exports.checkAndAppendUser = checkAndAppendUser;

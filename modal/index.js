@@ -48,7 +48,7 @@ serviceRegisterModal = {
   "blocks": [
 	{
 	  "type": "image_link",
-	  "url": "https://chatbot-fsmrz.run.goorm.io/static/today_turtle.gif"
+	  "url": "https://swm-chatbot-p5mv0r-txnuvo.run.goorm.io/static/today_turtle.gif"
 	},
     {
       "type": "text",
@@ -82,14 +82,14 @@ serviceRegisterModal = {
       "type": "divider"
     },
     {
-			  type: "button",
-			  text: "오늘의 거북씨 만나기 🐢",
-			  style : "primary",
-			  action_type : "call_modal",
-			  value: "1",
-			  action_name: 'start'
-		}
-    ]
+	  type: "button",
+	  text: "오늘의 거북씨 만나기 🐢",
+	  style : "primary",
+	  action_type : "call_modal",
+	  value: "1",
+	  action_name: 'start'
+	}
+  ]
 }
 
 serviceRegisterAgainModal = {
@@ -97,7 +97,7 @@ serviceRegisterAgainModal = {
 	"blocks": [
 		{
 		  "type": "image_link",
-		  "url": "https://chatbot-fsmrz.run.goorm.io/static/reboot_turtle.gif"
+		  "url": "https://swm-chatbot-p5mv0r-txnuvo.run.goorm.io/static/reboot_turtle.gif"
 		},
 		{
 		  "type": "text",
@@ -121,7 +121,7 @@ registerCompleteModal_3 = {
   "blocks": [
     {
       "type": "image_link",
-      "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle_three.png"
+      "url": "https://swm-chatbot-p5mv0r-txnuvo.run.goorm.io/static/turtle_three.png"
     },
     {
       "type": "text",
@@ -136,7 +136,7 @@ registerCompleteModal_2 = {
   "blocks": [
     {
       "type": "image_link",
-      "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle_two.png"
+      "url": "https://swm-chatbot-p5mv0r-txnuvo.run.goorm.io/static/turtle_two.png"
     },
     {
       "type": "text",
@@ -151,7 +151,7 @@ registerCompleteModal_1 = {
   "blocks": [
     {
       "type": "image_link",
-      "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle_one.png"
+      "url": "https://swm-chatbot-p5mv0r-txnuvo.run.goorm.io/static/turtle_one.png"
     },
     {
       "type": "text",
@@ -175,7 +175,7 @@ levelChangeModal_3 = {
       "type": "section",
       "accessory": {
         "type": "image_link",
-        "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle_3.png"
+        "url": "https://swm-chatbot-p5mv0r-txnuvo.run.goorm.io/static/turtle_3.png"
       },
 		"content": {
 		"type": "text",
@@ -198,7 +198,7 @@ levelChangeModal_2 = {
       "type": "section",
       "accessory": {
         "type": "image_link",
-        "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle_2.png"
+        "url": "https://swm-chatbot-p5mv0r-txnuvo.run.goorm.io/static/turtle_2.png"
       },
 		"content": {
 		"type": "text",
@@ -221,7 +221,7 @@ levelChangeModal_1 = {
       "type": "section",
       "accessory": {
         "type": "image_link",
-        "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle_1.png"
+        "url": "https://swm-chatbot-p5mv0r-txnuvo.run.goorm.io/static/turtle_1.png"
       },
 		"content": {
 		"type": "text",
@@ -238,7 +238,7 @@ registerRejectModal = {
   "blocks": [
     {
       "type": "image_link",
-      "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle_zero.gif"
+      "url": "https://swm-chatbot-p5mv0r-txnuvo.run.goorm.io/static/turtle_zero.gif"
 		// "url" : "https://media.giphy.com/media/3ornjM1ow4vbrifDAA/giphy.gif"
     },
     {
@@ -271,7 +271,7 @@ pairingServiceModal = {
   "blocks": [
 	{
 	  "type": "image_link",
-	  "url": "https://chatbot-fsmrz.run.goorm.io/static/send_turtle.png"
+	  "url": "https://swm-chatbot-p5mv0r-txnuvo.run.goorm.io/static/send_turtle.png"
 	},
 	{
 	  "type": "text",
@@ -324,7 +324,7 @@ pairingReceivingModal={
   "blocks": [
 	{
       "type": "image_link",
-      "url": "https://chatbot-fsmrz.run.goorm.io/static/delivery_turtle.png"
+      "url": "https://swm-chatbot-p5mv0r-txnuvo.run.goorm.io/static/delivery_turtle.png"
     },
     {
       "type": "text",
@@ -400,7 +400,7 @@ messageURLServiceModal = {
 	},
     {
       "type": "image_link",
-      "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle.png"
+      "url": "https://swm-chatbot-p5mv0r-txnuvo.run.goorm.io/static/turtle.png"
 	}
   ]
 }
@@ -692,7 +692,7 @@ workStartAlarmModal = {
       },
       "accessory": {
         "type": "image_link",
-        "url": "https://chatbot-fsmrz.run.goorm.io/static/in.gif"
+        "url": "https://swm-chatbot-p5mv0r-txnuvo.run.goorm.io/static/in.gif"
       }
     }
   ]
@@ -714,7 +714,7 @@ workEndAlarmModal = {
       },
       "accessory": {
         "type": "image_link",
-        "url": "https://chatbot-fsmrz.run.goorm.io/static/out.gif"
+        "url": "https://swm-chatbot-p5mv0r-txnuvo.run.goorm.io/static/out.gif"
       }
     }
   ]

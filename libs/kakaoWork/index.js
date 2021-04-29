@@ -17,18 +17,23 @@ exports.getUserList = async () => {
 
 // 유저 목록 추가 검색
 exports.getAllUserList = async () => {
-  let res = await kakaoInstance.get('/v1/users.list?limit=1');
+  let u = await kakaoInstance.get('/v1/users.list?limit=100');
   let allusers = []
-  allusers = allusers.concat(res.data.users);
+  allusers = allusers.concat(u.data.users);
   while(true){
 	const data = {
-		limit:100,
-    	cursor: res.data.cursor,
+    	cursor: u.data.cursor,
     };
-	const u = await kakaoInstance.get('/v1/users.list', data);	
+	  
+	u = await kakaoInstance.get('/v1/users.list', {
+		params: {
+			cursor: u.data.cursor
+		}
+	});	
+		
 	allusers = allusers.concat(u.data.users);
-	console.log("kakaoapi:: ", allusers);
-	if(u.data.cursor === null) break;
+	console.log(u.data.cursor);
+	if(u.data.cursor == null) break;
   }
   return allusers;
 };

@@ -8,16 +8,20 @@ const customModals = require("../modal")
 
 router.get('/', async (req, res, next) => {
 	// 유저 목록 검색 (1)
-	console.log("inside get");
+	// console.log("inside get");
 	const users = await libKakaoWork.getAllUserList();	
-	console.log(users);
+	//console.log(users);
 	
 	// 검색된 모든 유저에게 각각 채팅방 생성 (2)
-	const conversations = await Promise.all(
-		users.map((user) => libKakaoWork.openConversations({ userId: user.id }))
-	);
-	console.log("conversations:: ", conversations);
+	// const conversations = await Promise.all(
+	// 	users.map((user) => libKakaoWork.openConversations({ userId: user.id }))
+	// );
+	//console.log("conversations:: ", conversations);
 	// 생성된 채팅방에 메세지 전송 (3)
+	
+	
+	// noh, quartzes, 김진원 , 달풍이, 종이비행기 
+	
 	const messages = await Promise.all([
 		conversations.map((conversation) =>
 			libKakaoWork.sendMessage({
@@ -28,11 +32,11 @@ router.get('/', async (req, res, next) => {
 		),
 	]);
 	
-	console.log("messages:: ", messages);
+	//console.log("messages:: ", messages);
 	
 	res.json({
 		users,
-		conversations,
+		// conversations,
 		messages,
 	});
 });
@@ -48,11 +52,11 @@ router.post('/request', async (req, res, next) => {
 			});
 			break;
 		case '0':
-			console.log("yeah deactive");
+			// console.log("yeah deactive");
 			break;	
 		default:
 			let pairingMessageModal = customModals.pairingSendingModal;
-			console.log("sending message to : ", value, "from ");
+			// console.log("sending message to : ", value, "from ");
 			pairingMessageModal.value = value;
 			res.json({
 				view: pairingMessageModal,
@@ -66,7 +70,7 @@ router.post('/request', async (req, res, next) => {
 router.post('/callback', async (req, res, next) => {
 	const { message, action_name, actions, action_time, value, react_user_id } = req.body; // 설문조사 결과 확인 (2)
 	const newuser = await libKakaoWork.getUserInfo(react_user_id);
-    console.log("callback value::", value);
+    //console.log("callback value::", value);
 	if(value) {	 
 		if(value == "reboot"){
 			libKakaoWork.sendMessage({
@@ -107,7 +111,7 @@ router.post('/callback', async (req, res, next) => {
 				userService.deleteUser(newuser);	  
 				await libKakaoWork.sendMessage({
 					conversationId: message.conversation_id,
-					text: '안녕하세요, 친절한 거북씨에요',
+					text: 'dd',
 					blocks: customModals.registerRejectModal.blocks
 				});  
 				break;
