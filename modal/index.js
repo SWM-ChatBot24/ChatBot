@@ -52,18 +52,50 @@ serviceRegisterModal = {
 			// "url": "https://media.giphy.com/media/Vc08GUgkUNZw6YGMjh/giphy.gif"
 		},
 		{
-		  "type": "text",
-		  "text": "*친절한 거북씨* 입니다!\n오늘의 거북씨를 만나볼까요?",
-		  "markdown": true
-		},
-		  {
+  "blocks": [
+	{
+	  "type": "image_link",
+	  "url": "https://chatbot-fsmrz.run.goorm.io/static/today_turtle.gif"
+	},
+    {
+      "type": "text",
+      "text": "*WELCOME 친절한 거북씨🐢*",
+      "markdown": true
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "text",
+      "text": "거-하! *친절한 거북씨* 입니다🐢\nPC를 사용하는 여러분들이\n거북목을 유지하지 않도록...!\n친절한 거북씨가 도와 드릴게요🙌🏻",
+      "markdown": true
+    },
+    {
+      "type": "text",
+      "text": "*오늘의 거북씨*를 선택하세요!\n알림의 빈도 순서는\n빡센 > 평범한 > 느긋한 입니다!",
+      "markdown": true
+    },
+    {
+      "type": "text",
+      "text": "선택 후, 기다리기만 하세요!\n거북씨가 알림을 줄 거예요😃\n만약 알림을 받고 싶지 않다면,\n휴식하는 거북이를 선택해주세요!",
+      "markdown": true
+    },
+    {
+      "type": "text",
+      "text": "거북씨와 *스트레칭* 타임,\n다른 유저에게 *일일 거북씨* 되기\n등등의 기능도 사용해보세요!\n친절한 거북씨가 늘 함께 할게요!😃",
+      "markdown": true
+    },
+    {
+      "type": "divider"
+    },
+    {
 			  type: "button",
 			  text: "오늘의 거북씨 만나기 🐢",
-			  style : "default",
+			  style : "primary",
 			  action_type : "call_modal",
 			  value: "1",
 			  action_name: 'start'
-		  },
+		}
     ]
 }
 
@@ -82,10 +114,10 @@ serviceRegisterAgainModal = {
 		  {
 			  type: "button",
 			  text: "나의 거북씨 다시 만나기 🐢",
-			  style : "default",
+			  style : "primary",
 			  action_type : "call_modal",
 			  value: "1",
-			  action_name: 'start'
+			  action_name: 'restart'
 		  }
     ]
 }
@@ -143,7 +175,7 @@ levelChangeModal_3 = {
   "blocks": [
     {
       "type": "header",
-      "text": "나는! 빡센 거북이!",
+      "text": "나는! 빡센 거북이! 😡",
       "style": "red"
     },
     {
@@ -154,7 +186,7 @@ levelChangeModal_3 = {
       },
 		"content": {
 		"type": "text",
-		"text": "너 열정 넘치는구나?\n오늘 빡세고 열정있게 가보자~!",
+		"text": "너 열정 넘치는구나?\n오늘 빡세고 열정있게 가보자~! 🔥",
 		"markdown": true
       },
     }
@@ -166,7 +198,7 @@ levelChangeModal_2 = {
   "blocks": [
     {
       "type": "header",
-      "text": "나는! 평범한 거북이!",
+      "text": "나는! 평범한 거북이! 😐",
       "style": "red"
     },
     {
@@ -177,7 +209,7 @@ levelChangeModal_2 = {
       },
 		"content": {
 		"type": "text",
-		"text": "나 선택해줘서 고마워!\n오늘 열심히 살아보자! 아자!",
+		"text": "나 선택해줘서 고마워!\n오늘 열심히 살아보자! 아자! 👊🏻",
 		"markdown": true
       },
     }
@@ -189,7 +221,7 @@ levelChangeModal_1 = {
   "blocks": [
     {
       "type": "header",
-      "text": "나는! 느긋한 거북이!",
+      "text": "나는! 느긋한 거북이! 😃",
       "style": "red"
     },
     {
@@ -200,7 +232,7 @@ levelChangeModal_1 = {
       },
 		"content": {
 		"type": "text",
-		"text": "인생 행복하게 살아야지~\n여유있는 하루 보내자, 친구!",
+		"text": "인생 행복하게 살아야지~\n여유있는 하루 보내자, 친구! 🌸",
 		"markdown": true
       },
     }
@@ -218,7 +250,7 @@ registerRejectModal = {
     },
     {
       "type": "text",
-      "text": "오늘은 푹~ 쉬고, 내일은 나를 꼭 찾아줘 거북이 친구!",
+      "text": "오늘은 푹~ 쉬고,\n내일은 *나를 꼭 찾아줘 거북이 친구!*",
       "markdown": true
     },
 	{
@@ -226,15 +258,16 @@ registerRejectModal = {
     },
 	{
       "type": "text",
-      "text": "거북씨를 다시 만나고 싶으면, 아래 *'다시 만난 거북씨'*를 클릭해주세요!",
+      "text": "거북씨를 다시 만나고 싶으면,\n아래 *다시 만난 거북씨*를 클릭해주세요!",
       "markdown": true
     },
 	{
-      "type": "button",
-      "text": "다시 만난 거북씨 🐢",
-      "style": "default",
-	  "value" : "reboot",
-	  "action_type" : "submit_action",
+      type: "button",
+      text: "다시 만난 거북씨 🐢",
+      style: "primary",
+	  value : "reboot",
+      action_name : "1111",
+	  action_type : "submit_action",
     }
   ] 
 }
@@ -259,13 +292,13 @@ pairingServiceModal = {
 	},
 	{
 	  "type": "text",
-	  "text": "자세를 바로 하라는 메세지와 함께 간단한 응원글을 보내주세요!",
+	  "text": "자세를 바로 하라는 메세지와 함께\n간단한 응원글을 보내주세요!",
 	  "markdown": true
 	},
 	{
       "type": "button",
-      "text": "응원글 보내기",
-      "style": "default",
+      "text": "응원글 보내기 👊🏻",
+      "style": "primary",
       "value": "",
 	  "action_type": "call_modal",
     }
@@ -331,29 +364,29 @@ messageServiceModal_3 = [
 ];
 
 messageServiceModal_2 = [
-	"친구! 목이 굽었어! 바르게 펴자! 😊",
-	"친구, 지금 바른 자세야? 다시 고쳐 앉자! 😊",
-	"작은 습관이 모이면 큰 결과를 만드는 거 잊지마! 😊",
-	"똑똑똑~ 지금 자세 바로 하고 있나요~? 😊",
-	"어깨가 결리면 가볍게 풀어주는 게 좋아 😊",
-	"지금 목 한 번 돌려주면 어때? 개운해질 거야 😊",
-	"일에 집중하는 것도 좋지만, 자세에도 조금 더 집중해줘! 😊",
+	"친구! 목이 굽었어! 바르게 펴자! 🙂",
+	"친구, 지금 바른 자세야? 다시 고쳐 앉자! 🙂",
+	"작은 습관이 모이면 큰 결과를 만드는 거 잊지마! 🙂",
+	"똑똑똑~ 지금 자세 바로 하고 있나요~? 🙂",
+	"어깨가 결리면 가볍게 풀어주는 게 좋아 🙂",
+	"지금 목 한 번 돌려주면 어때? 개운해질 거야 🙂",
+	"일에 집중하는 것도 좋지만, 자세에도 조금 더 집중해줘! 🙂",
 ];
 
 messageServiceModal_1 = [
-	"친구~ 스트레칭 한 번 하고 일하자 🙂",
-	"친구, 몸을 뒤로 조금만 빼는 건 어때? 🙂",
-	"친구야! 혹시 목을 앞으로 빼고 있진 않니? 🙂",
-	"친구야~ 몸이 피로하면 잠시 기지개를 펴는 것도 좋아 🙂",
-	"많이 피곤하지? 커피 한 잔 할겸 잠시 걷고 와! 🙂",
+	"친구~ 스트레칭 한 번 하고 일하자 😊",
+	"친구, 몸을 뒤로 조금만 빼는 건 어때? 😊",
+	"친구야! 혹시 목을 앞으로 빼고 있진 않니? 😊",
+	"친구야~ 몸이 피로하면 잠시 기지개를 펴는 것도 좋아 😊",
+	"많이 피곤하지? 커피 한 잔 할겸 잠시 걷고 와! 😊",
 ];
 
 messageServiceModal = {
-  "text": "친구~ 스트레칭 한 번 하고 일하자 🙂",
+  "text": "친구~ 스트레칭 한 번 하고 일하자 😊",
   "blocks": [
     {
       "type": "text",
-      "text": "친구~ 스트레칭 한 번 하고 일하자 🙂",
+      "text": "친구~ 스트레칭 한 번 하고 일하자 😊",
       "markdown": true
     }
   ]
@@ -364,7 +397,7 @@ messageURLServiceModal = {
   "blocks": [
     {
       "type": "header",
-      "text": "거북씨! 스트레칭하고 일 해!",
+      "text": "🔥 거북씨! 스트레칭 하자! 🔥",
       "style": "yellow"
     },
     {
@@ -381,14 +414,14 @@ messageURLServiceModal = {
 
 
 dynamicServiceRegisterModal = {
-    "title": "나의 거북씨🐢",
+    "title": "나의 거북씨 🐢",
     "accept": "입니다.",
     "decline": "아닙니다.",
     "value": "",
     "blocks": [
         {
             "type": "label",
-            "text": "나의 거북씨는요,",
+            "text": "*🐢 나의 거북씨는요,*",
             "markdown": true
         },
         {
@@ -417,7 +450,7 @@ dynamicServiceRegisterModal = {
         },
 		{
             "type": "label",
-            "text": "나의 거북씨 출근 시간은요",
+            "text": "*🕗 나의 거북씨 출근 시간은요,*",
             "markdown": true
         },
         {
@@ -530,7 +563,7 @@ dynamicServiceRegisterModal = {
         },
 		{
             "type": "label",
-            "text": "나의 거북씨 퇴근 시간은요",
+            "text": "*🕕 나의 거북씨 퇴근 시간은요,*",
             "markdown": true
         },
         {
@@ -643,7 +676,7 @@ dynamicServiceRegisterModal = {
         },
 		{
             "type": "label",
-            "text": "*'출근시간 <= 퇴근시간'*을 지켜주세요!\n휴식하는 거북씨일 때도 출근 및 퇴근 시간을 선택해주세요!",
+            "text": "휴식하는 거북씨일 때도 출근 및 퇴근 시간을 선택해주세요!",
             "markdown": true
         }
     ]
@@ -654,14 +687,14 @@ workStartAlarmModal = {
   "blocks": [
 	{
       "type": "header",
-      "text": "거북씨 출근도장 쾅!",
+      "text": "거북씨 출근도장 쾅! 🕗",
       "style": "blue"
     },
     {
       "type": "section",
       "content": {
         "type": "text",
-        "text": "출근하는 발거음이 제일 무거워...",
+        "text": "*출근하는 발걸음이\n제일 무거워...*",
         "markdown": true
       },
       "accessory": {
@@ -676,14 +709,14 @@ workEndAlarmModal = {
   "blocks": [
 	{
       "type": "header",
-      "text": "거북씨 퇴근도장 쾅!",
+      "text": "거북씨 퇴근도장 쾅! 🕕",
       "style": "blue"
     },
     {
       "type": "section",
       "content": {
         "type": "text",
-        "text": "퇴근하는 발걸음이 제일 가벼워!",
+        "text": "*퇴근하는 발걸음이\n제일 가벼워!*",
         "markdown": true
       },
       "accessory": {

@@ -9,7 +9,7 @@ this.level = 거북봇 등장 속도 (1 : 낮음, 3 : 높음)
 this.NextUpdateTime = 다음 거북봇 등장 시간(Date.now() 기준, ms)
 this.startTime = 유저가 선택한 봇 첫 등장 시간대
 this.endTime = 유저가 선택한 봇 알림 종료 시간대
-this.working = 거북봇이 활동중인 시간대인가 -> 1 : yes 2 : no
+this.working = 거북봇이 활동중인 시간대인가 -> 1 : yes 0 : no
 */
 const libKakaoWork = require('../libs/kakaoWork');
 const customModals = require('../modal');
@@ -46,13 +46,13 @@ function checkAndAppendUser(user, message) {
         console.log('new user!!');
         appendUser(user);
         // send message to user
-		if(userHistory[user.id] === undefined){
+		// if(userHistory[user.id] === undefined){
 			libKakaoWork.sendMessage({
 				conversationId: message.conversation_id,
 				text: '안녕하세요, 친절한 거북씨에요',
 				blocks: registerModalMap[Number(user.level)].blocks,
 			});
-		}
+		// }
     } else {
         // level update
         serviceRegisteredUser[user.id].level = user.level;
@@ -168,10 +168,6 @@ async function processUpdateTime() {
         if ((today.getHours() + 9) % 24 >= user.startTime && user.working == 0) {
             user.working = 1;
 			
-			//set next updateTime
-			user.NextUpdateTime = Date.now();
-			await updateNextTime(newuser);
-			
             //open conversation
             const conversation = await libKakaoWork.openConversations({ userId: id });
             var messageBlock = customModals.workStartAlarmModal.blocks;
@@ -223,26 +219,26 @@ function getUnpairedUserIDList() {
     return Object.keys(unpairedUser);
 }
 
+/*
 function isWorking(user) {
 	const nowTime = Date.now();
 	let today = new Date();
-	if ((user.startTime < user.endTime &&((today.getHours() + 9) % 24 < user.startTime || (today.getHours() + 9) % 24 >= user.endTime)) 
-		|| (user.startTime > user.endTime && (today.getHours() + 9) % 24 >= user.endTime && (today.getHours() + 9) % 24 < user.startTime)){
+	if (user.working == 1){
 		return true;
 	}
 	return false;
 }
+*/
 
 //generate a pair between active users
 async function getRandomUserIDList(userIDList) {
     const randomUserIDList = [];
 	userIDList.forEach(userId => {
 		const user = serviceRegisteredUser[userId];
-		if(isWorking(user)){ 
+		if(user.working){ 
 			randomUserIDList.push(userId);					  
 		}
 	});
-
     return randomUserIDList;
 }
 
@@ -262,7 +258,7 @@ async function pairingUser() {
     if (selectedPair.length > 1) {
         delete unpairedUser[selectedPair[0]];
         delete unpairedUser[selectedPair[1]];
-
+		
         const conversation = await libKakaoWork.openConversations({ userId: selectedPair[0] });
         let message = {
             conversationId: conversation.id,

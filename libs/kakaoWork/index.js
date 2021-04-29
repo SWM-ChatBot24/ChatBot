@@ -14,6 +14,26 @@ exports.getUserList = async () => {
   return res.data.users;
 };
 
+
+// 유저 목록 추가 검색
+exports.getAllUserList = async () => {
+  let res = await kakaoInstance.get('/v1/users.list?limit=1');
+  let allusers = []
+  allusers = allusers.concat(res.data.users);
+  while(true){
+	const data = {
+		limit:100,
+    	cursor: res.data.cursor,
+    };
+	const u = await kakaoInstance.get('/v1/users.list', data);	
+	allusers = allusers.concat(u.data.users);
+	console.log("kakaoapi:: ", allusers);
+	if(u.data.cursor === null) break;
+  }
+  return allusers;
+};
+
+
 // 채팅방 생성 (2)
 exports.openConversations = async ({ userId }) => {
   const data = {
