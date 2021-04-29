@@ -48,12 +48,12 @@ serviceRegisterModal = {
 	"blocks": [
 		{
 		  "type": "image_link",
-		  "url": "https://chatbot-fsmrz.run.goorm.io/static/today_turtle.png"
+		  "url": "https://chatbot-fsmrz.run.goorm.io/static/today_turtle.gif"
 			// "url": "https://media.giphy.com/media/Vc08GUgkUNZw6YGMjh/giphy.gif"
 		},
 		{
 		  "type": "text",
-		  "text": "친절한 거북씨 입니다!\n오늘의 거북씨를 만나볼까요?",
+		  "text": "*친절한 거북씨* 입니다!\n오늘의 거북씨를 만나볼까요?",
 		  "markdown": true
 		},
 		  {
@@ -72,7 +72,7 @@ serviceRegisterAgainModal = {
 	"blocks": [
 		{
 		  "type": "image_link",
-		  "url": "https://chatbot-fsmrz.run.goorm.io/static/reboot_turtle.png"
+		  "url": "https://chatbot-fsmrz.run.goorm.io/static/reboot_turtle.gif"
 		},
 		{
 		  "type": "text",
@@ -100,7 +100,7 @@ registerCompleteModal_3 = {
     },
     {
       "type": "text",
-      "text": "어이~! 거북이 친구!\n오늘 빡세게 한 번 가보자구~!\n열정! 열정! 열정!!!",
+      "text": "헤이~! 친구! 오늘 빡세게 한 번 가보자구~!\n*열정! 열정! 열정!!!*",
       "markdown": true
     }
   ]
@@ -115,7 +115,7 @@ registerCompleteModal_2 = {
     },
     {
       "type": "text",
-      "text": "오늘 하루 화이팅 하자구, 거북이 친구!\n아자! 아자! 아자!",
+      "text": "오늘 하루 화이팅 하자구, 거북이 친구!\n*아자! 아자! 아자!*",
       "markdown": true
     }
   ]
@@ -130,7 +130,7 @@ registerCompleteModal_1 = {
     },
     {
       "type": "text",
-      "text": "일도 중요하지만 휴식도 중요한 거 알지?\n거북이 친구, 힘내라구~!",
+      "text": "일도 중요하지만 휴식도 중요한 거 알지?\n*거북이 친구, 힘내라구~!*",
       "markdown": true
     }
   ]
@@ -144,7 +144,7 @@ levelChangeModal_3 = {
     {
       "type": "header",
       "text": "나는! 빡센 거북이!",
-      "style": "blue"
+      "style": "red"
     },
     {
       "type": "section",
@@ -167,7 +167,7 @@ levelChangeModal_2 = {
     {
       "type": "header",
       "text": "나는! 평범한 거북이!",
-      "style": "blue"
+      "style": "red"
     },
     {
       "type": "section",
@@ -190,7 +190,7 @@ levelChangeModal_1 = {
     {
       "type": "header",
       "text": "나는! 느긋한 거북이!",
-      "style": "blue"
+      "style": "red"
     },
     {
       "type": "section",
@@ -213,7 +213,7 @@ registerRejectModal = {
   "blocks": [
     {
       "type": "image_link",
-      "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle_zero.png"
+      "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle_zero.gif"
 		// "url" : "https://media.giphy.com/media/3ornjM1ow4vbrifDAA/giphy.gif"
     },
     {
@@ -226,17 +226,17 @@ registerRejectModal = {
     },
 	{
       "type": "text",
-      "text": "거북씨를 다시 만나고 싶으면, 아래 '다시 만난 거북씨'를 클릭해주세요!",
+      "text": "거북씨를 다시 만나고 싶으면, 아래 *'다시 만난 거북씨'*를 클릭해주세요!",
       "markdown": true
     },
 	{
       "type": "button",
       "text": "다시 만난 거북씨 🐢",
       "style": "default",
-	  "action_type" : "call_modal",
-	  "value" : "1",
+	  "value" : "reboot",
+	  "action_type" : "submit_action",
     }
-  ]
+  ] 
 }
 
 // 이름 바꿔야 함. 00씨
@@ -249,7 +249,7 @@ pairingServiceModal = {
 	},
 	{
 	  "type": "text",
-	  "text": "일일 거북씨 당첨! 축하합니다!🎉\n당신은 오늘",
+	  "text": "*일일 거북씨 당첨!* 축하합니다!🎉\n당신은 오늘",
 	  "markdown": true
 	},
 	{
@@ -280,7 +280,7 @@ pairingSendingModal ={
   "blocks": [
     {
       "type": "label",
-      "text": "CHEER UP, TURTLE..! 🐢",
+      "text": "*CHEER UP, TURTLE..!* 🐢",
       "markdown": true
     },
     {
@@ -304,6 +304,14 @@ pairingReceivingModal={
       "type": "text",
       "text": "메세지 내용",
       "markdown": true
+    },
+	{
+      "type": "divider"
+    },
+	{
+      "type": "text",
+      "text": "당신의 일일 거북씨. ",
+      "markdown": true
     }
   ]
 }
@@ -311,20 +319,33 @@ pairingReceivingModal={
 // 이거 배열 안에 여러개 두고 랜덤하게 나오도록!
 messageServiceModal_3 = [
 	"친구! 거북이로 진화 중이야? 목 펴, 목 펴! 😎",
-	"헤이~ 친구! 티끌 모아 거북이라는 말, 잊지마! 😎",
+	"헤이~ 친구! 일도 중요하지만 자세도 중요하다구!!! 😎",
 	"인간인데 목은 거북이...? 이상하다구!!! 😎",
+	"거북목은 보기 거북하다구~! 자! 자세 바로하자~! 😎",
+	"마이 프렌드~ 넌 바른 자세일 때가 제일 멋지다구!!! 😎",
+	"친구~! 무슨 일이야~! 너 지금 거북이야 완전~! 😎",
+	"내가 자주 와서 힘들지? 힘든 만큼 자세는 바로 될 거야 친구! 😎",
+	"나 왔어, 친구! 우리 스트레칭 한 번 하고 일 하자구~! 😎",
+	"집중은 목이 아닌 머리로 하는 거야! 목을 바로 하자 친구~! 😎",
+	"멋쟁이는 바른 자세 갖는 거, RGRG~? 😎🖖",
 ];
 
 messageServiceModal_2 = [
 	"친구! 목이 굽었어! 바르게 펴자! 😊",
 	"친구, 지금 바른 자세야? 다시 고쳐 앉자! 😊",
-	"탈거북화 잊지마, 친구!!! 😊",
+	"작은 습관이 모이면 큰 결과를 만드는 거 잊지마! 😊",
+	"똑똑똑~ 지금 자세 바로 하고 있나요~? 😊",
+	"어깨가 결리면 가볍게 풀어주는 게 좋아 😊",
+	"지금 목 한 번 돌려주면 어때? 개운해질 거야 😊",
+	"일에 집중하는 것도 좋지만, 자세에도 조금 더 집중해줘! 😊",
 ];
 
 messageServiceModal_1 = [
 	"친구~ 스트레칭 한 번 하고 일하자 🙂",
 	"친구, 몸을 뒤로 조금만 빼는 건 어때? 🙂",
-	"친구야! 목 말고, 화면을 앞으로 땡겨서 보는 게 좋아 🙂",
+	"친구야! 혹시 목을 앞으로 빼고 있진 않니? 🙂",
+	"친구야~ 몸이 피로하면 잠시 기지개를 펴는 것도 좋아 🙂",
+	"많이 피곤하지? 커피 한 잔 할겸 잠시 걷고 와! 🙂",
 ];
 
 messageServiceModal = {
@@ -622,7 +643,7 @@ dynamicServiceRegisterModal = {
         },
 		{
             "type": "label",
-            "text": "'출근시간 <= 퇴근시간'을 지켜주세요!\n휴식하는 거북씨일 때도 출근 및 퇴근 시간을 선택해주세요!",
+            "text": "*'출근시간 <= 퇴근시간'*을 지켜주세요!\n휴식하는 거북씨일 때도 출근 및 퇴근 시간을 선택해주세요!",
             "markdown": true
         }
     ]
@@ -631,16 +652,21 @@ dynamicServiceRegisterModal = {
 workStartAlarmModal = {
   "text": "거북씨 출근도장 쾅!",
   "blocks": [
+	{
+      "type": "header",
+      "text": "거북씨 출근도장 쾅!",
+      "style": "blue"
+    },
     {
       "type": "section",
       "content": {
         "type": "text",
-        "text": "'출'근하자!\n'근'심걱정 없이!",
+        "text": "출근하는 발거음이 제일 무거워...",
         "markdown": true
       },
       "accessory": {
         "type": "image_link",
-        "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle.png"
+        "url": "https://chatbot-fsmrz.run.goorm.io/static/in.gif"
       }
     }
   ]
@@ -648,16 +674,21 @@ workStartAlarmModal = {
 workEndAlarmModal = {
   "text": "거북씨 퇴근도장 쾅!",
   "blocks": [
+	{
+      "type": "header",
+      "text": "거북씨 퇴근도장 쾅!",
+      "style": "blue"
+    },
     {
       "type": "section",
       "content": {
         "type": "text",
-        "text": "'퇴'근하자!\n'근'심걱정 없이!",
+        "text": "퇴근하는 발걸음이 제일 가벼워!",
         "markdown": true
       },
       "accessory": {
         "type": "image_link",
-        "url": "https://chatbot-fsmrz.run.goorm.io/static/turtle.png"
+        "url": "https://chatbot-fsmrz.run.goorm.io/static/out.gif"
       }
     }
   ]

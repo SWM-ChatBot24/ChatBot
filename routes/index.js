@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
 		conversations.map((conversation) =>
 			libKakaoWork.sendMessage({
 				conversationId: conversation.id,
-				text: '거북이 도착',
+				text: '오늘의 거북씨 도착!',
 				blocks: customModals.serviceRegisterModal.blocks, // 간단한 시작하기 모달
 			})
 		),
@@ -36,15 +36,15 @@ router.get('/', async (req, res, next) => {
 // routes/index.js
 router.post('/request', async (req, res, next) => {
 	const { message, value } = req.body;
-	switch (value) {
-		case '1': // register service
+	switch (value){
+		case '1': // default register service
 			res.json({
 				view: customModals.dynamicServiceRegisterModal // 반응형 모달 추가
 			});
 			break;
 		case '0':
 			console.log("yeah deactive");
-			break;
+			break;	
 		default:
 			let pairingMessageModal = customModals.pairingSendingModal;
 			console.log("sending message to : ", value, "from ");
@@ -62,31 +62,27 @@ router.post('/callback', async (req, res, next) => {
 	const { message, action_name, actions, action_time, value, react_user_id } = req.body; // 설문조사 결과 확인 (2)
 	const newuser = await libKakaoWork.getUserInfo(react_user_id);
     
-	if(value) {	  
-		const conversation = await libKakaoWork.openConversations({ userId: value });
-		await libKakaoWork.sendMessage({
-			conversationId: conversation.id,
-			text: "배달부 거북이",
-			blocks: [
-				{
-					"type": "header",
-					"text": "배달부 거북이",
-					"style": "blue"
-				},
-				{
-					"type": "text",
-					"text": actions.message_text,
-					"markdown": true
-				},
-				{
-					"type": "text",
-					"text": "by. "+newuser.name,
-					"markdown": true
-				}
-			]
-		});
+	if(value) {	 
+		if(value === "reboot"){
+			libKakaoWork.sendMessage({
+				conversationId: message.conversation_id,
+				text: '나의 거북씨 다시 만나기',
+				blocks: customModals.serviceRegisterAgainModal.blocks,
+			});
+		}
+		else{
+			const conversation = await libKakaoWork.openConversations({ userId: value });
+			let pairingreceivingmodal = customModals.pairingReceivingModal;
+			pairingreceivingmodal.blocks[1].text = actions.message_text;
+			pairingreceivingmodal.blocks[3].text += newuser.name;
+			await libKakaoWork.sendMessage({
+				conversationId: conversation.id,
+				text: pairingreceivingmodal.text,
+				blocks: pairingreceivingmodal.blocks,
+			});	
+		}
 	}
-
+	
 	// after dynamic block implementation
 	// 1, 2, 3 : levels | 0: service disable
 	switch(actions.select_turtle){

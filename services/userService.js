@@ -16,6 +16,7 @@ const customModals = require('../modal');
 
 let serviceRegisteredUser = {};
 let unpairedUser = {};
+let userHistory = {};
 
 // modal mapping
 
@@ -40,16 +41,18 @@ const levelChangeModalMap = [
 
 //push user to serviceRegisteredUser
 function checkAndAppendUser(user, message) {
-    if (serviceRegisteredUser[user.id] === undefined) {
+    if (serviceRegisteredUser[user.id] === undefined) { 
         // check null
         console.log('new user!!');
         appendUser(user);
         // send message to user
-        libKakaoWork.sendMessage({
-            conversationId: message.conversation_id,
-            text: '안녕하세요, 친절한 거북씨에요',
-            blocks: registerModalMap[Number(user.level)].blocks,
-        });
+		if(userHistory[user.id] === undefined){
+			libKakaoWork.sendMessage({
+				conversationId: message.conversation_id,
+				text: '안녕하세요, 친절한 거북씨에요',
+				blocks: registerModalMap[Number(user.level)].blocks,
+			});
+		}
     } else {
         // level update
         serviceRegisteredUser[user.id].level = user.level;
@@ -66,6 +69,7 @@ function checkAndAppendUser(user, message) {
 function appendUser(user) {
     serviceRegisteredUser[user.id] = user;
     unpairedUser[user.id] = user.id;
+	userHistory[user.id] = user.id;
     // console.log(serviceRegisteredUser);
     // console.log(unpairedUser);
 }
@@ -163,6 +167,11 @@ async function processUpdateTime() {
         //거북이 출근 알림
         if ((today.getHours() + 9) % 24 >= user.startTime && user.working == 0) {
             user.working = 1;
+			
+			//set next updateTime
+			user.NextUpdateTime = Date.now();
+			await updateNextTime(newuser);
+			
             //open conversation
             const conversation = await libKakaoWork.openConversations({ userId: id });
             var messageBlock = customModals.workStartAlarmModal.blocks;
@@ -229,13 +238,14 @@ async function getRandomUserIDList(userIDList) {
     const randomUserIDList = [];
 	userIDList.forEach(userId => {
 		const user = serviceRegisteredUser[userId];
-		if(await isWorking(user)){
-			randomUserIDList.push(userId);
+		if(isWorking(user)){ 
+			randomUserIDList.push(userId);					  
 		}
 	});
 
     return randomUserIDList;
 }
+
 
 /**
  * Get a list of unpaired user IDs
@@ -260,7 +270,7 @@ async function pairingUser() {
             blocks: customModals.pairingServiceModal.blocks,
         };
         message.blocks[2].text =
-            serviceRegisteredUser[selectedPair[1]].name + ' 님의 일일 거북씨 입니다.';
+            '*' + serviceRegisteredUser[selectedPair[1]].name + '*' + ' 님의 일일 거북씨 입니다.';
 		message.blocks[4].value = selectedPair[1];
         libKakaoWork.sendMessage(message);
     }
