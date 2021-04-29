@@ -54,5 +54,7 @@
 ### 챗봇 만든 멋진 거북씨들🐢
 **강문해🐢 김영석🐢 김진원🐢 김현지🐢 노휘인🐢**
 
-
+### 프로젝트 지원
+이 성과는 2021년도 과학기술정보통신부의 재원으로 정보통신기획평가원의 지원을 받아 수행된 연구임(IITP-0000-SW마에스트로과정).
+This work was supported by the Institute of Information & Communications Technology Planning & Evaluation(IITP) grant funded by the Ministry of Science and ICT(MSIT) (IITP-0000-SW Maestro training course).
 
