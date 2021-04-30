@@ -83,7 +83,7 @@ router.post('/callback', async (req, res, next) => {
 			const conversation = await libKakaoWork.openConversations({ userId: value });
 			let pairingreceivingmodal = customModals.pairingReceivingModal;
 			pairingreceivingmodal.blocks[1].text = actions.message_text;
-			pairingreceivingmodal.blocks[3].text += newuser.name;
+			pairingreceivingmodal.blocks[3].text = "당신의 일일 거북씨, " + newuser.name;
 			await libKakaoWork.sendMessage({
 				conversationId: conversation.id,
 				text: pairingreceivingmodal.text,
